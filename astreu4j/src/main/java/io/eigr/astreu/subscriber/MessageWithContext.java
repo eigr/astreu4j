@@ -1,17 +1,18 @@
-package io.eigr.astreu;
+package io.eigr.astreu.subscriber;
 
+import io.eigr.astreu.Context;
 import io.eigr.astreu.protocol.Exchange;
 
 public final class MessageWithContext {
-    private Context context;
     private Exchange exchange;
+    private AcknowledgeContext context;
 
-    public MessageWithContext(Context context, Exchange exchange) {
+    public MessageWithContext(AcknowledgeContext context, Exchange exchange) {
         this.context = context;
         this.exchange = exchange;
     }
 
-    public Context getContext() {
+    public AcknowledgeContext getContext() {
         return context;
     }
 

@@ -7,7 +7,6 @@ import akka.stream.javadsl.AsPublisher;
 import akka.stream.javadsl.Sink;
 import akka.stream.javadsl.Source;
 import io.eigr.astreu.Config;
-import io.eigr.astreu.MessageWithContext;
 import io.eigr.astreu.Subscriber;
 import io.eigr.astreu.consumer.SubscriberClient;
 import io.eigr.astreu.protocol.System;
@@ -83,18 +82,18 @@ public final class DefaultSubscriber implements Subscriber {
                 system
         );
     }
-    
+
     private MessageWithContext createMessageWithContext(Message incoming) {
         final Message.DataCase dataCase = incoming.getDataCase();
         Exchange exchange = null;
         switch (dataCase) {
-            case SYSTEM:
-                final System sys = incoming.getSystem();
-                system.log().debug("System Message {}", sys);
-                break;
             case EXCHANGE:
                 exchange = incoming.getExchange();
                 system.log().debug("Exchange Message {}", exchange);
+                break;
+            case SYSTEM:
+                final System sys = incoming.getSystem();
+                system.log().debug("System Message {}", sys);
                 break;
             case ACK:
                 final Ack ack = incoming.getAck();
