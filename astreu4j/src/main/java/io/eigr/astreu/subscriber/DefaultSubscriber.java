@@ -10,9 +10,8 @@ import io.eigr.astreu.Config;
 import io.eigr.astreu.MessageWithContext;
 import io.eigr.astreu.Subscriber;
 import io.eigr.astreu.consumer.SubscriberClient;
-import io.eigr.astreu.protocol.Connect;
-import io.eigr.astreu.protocol.Message;
 import io.eigr.astreu.protocol.System;
+import io.eigr.astreu.protocol.*;
 import org.reactivestreams.Publisher;
 import org.slf4j.Logger;
 import reactor.core.publisher.EmitterProcessor;
@@ -63,7 +62,32 @@ public final class DefaultSubscriber implements Subscriber {
                 .build());
 
         return responseStream
-                .map(incoming -> new MessageWithContext(new AcknowledgeContext(incoming, stream), incoming))
+                .map(incoming -> {
+                    final Message.DataCase dataCase = incoming.getDataCase();
+                    Exchange exchange = null;
+                    switch (dataCase) {
+                        case SYSTEM:
+                            final System sys = incoming.getSystem();
+                            log.debug("In System Message {}", sys);
+                            break;
+                        case EXCHANGE:
+                            exchange = incoming.getExchange();
+                            log.debug("In Exchange Message {}", exchange);
+                            break;
+                        case ACK:
+                            final Ack ack = incoming.getAck();
+                            log.debug("In Ack Message {}", ack);
+                            break;
+                        case DATA_NOT_SET:
+                            log.warn("In No Data Message!");
+                            break;
+                        default:
+                            // code block
+                    }
+                    return new MessageWithContext(
+                            new AcknowledgeContext(system, subscription, exchange, stream),
+                            exchange);
+                })
                 .runWith(Sink.asPublisher(AsPublisher.WITHOUT_FANOUT), system);
     }
 
@@ -78,6 +102,5 @@ public final class DefaultSubscriber implements Subscriber {
     public String getSubscription() {
         return subscription;
     }
-
 
 }

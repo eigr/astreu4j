@@ -22,11 +22,11 @@ public final class Astreu {
         return new Astreu(new Config(host, port, options));
     }
 
-    public Subscriber asSubscriber(String topic, String subscription) {
+    public Subscriber asSub(String topic, String subscription) {
         return new DefaultSubscriber(topic, subscription, system, config);
     }
 
-    public Publisher asPublisher(String topic, String connectionId) {
+    public Publisher asPub(String topic, String connectionId) {
         return new DefaultPublisher(topic, connectionId, system, config);
     }
 }

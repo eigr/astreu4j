@@ -1,29 +1,29 @@
 package io.eigr.astreu;
 
-import io.eigr.astreu.protocol.Message;
+import io.eigr.astreu.protocol.Exchange;
 
 public final class MessageWithContext {
     private Context context;
-    private Message message;
+    private Exchange exchange;
 
-    public MessageWithContext(Context context, Message message) {
+    public MessageWithContext(Context context, Exchange exchange) {
         this.context = context;
-        this.message = message;
+        this.exchange = exchange;
     }
 
     public Context getContext() {
         return context;
     }
 
-    public Message getMessage() {
-        return message;
+    public Exchange getExchange() {
+        return exchange;
     }
 
     @Override
     public String toString() {
         return "MessageWithContext{" +
                 "context=" + context +
-                ", message=" + message +
+                ", exchange=" + exchange +
                 '}';
     }
 }
