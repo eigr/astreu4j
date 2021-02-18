@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: com.thesamet.scalapb:lenses_2.13:0.10.11">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/thesamet/scalapb/lenses_2.13/0.10.11/lenses_2.13-0.10.11.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/com/thesamet/scalapb/lenses_2.13/0.10.11/lenses_2.13-0.10.11-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/thesamet/scalapb/lenses_2.13/0.10.11/lenses_2.13-0.10.11-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

@@ -1,0 +1,41 @@
+INFO  started: Metals version 0.8.3 in workspace '/home/sleipnir/development/workspace/pessoal/eigr/akka-grpc-quickstart-java'
+INFO  time: initialize in 2.42s
+fev 17, 2021 12:44:39 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleNotification
+ADVERTÊNCIA: Notification threw an exception: {
+  "jsonrpc": "2.0",
+  "method": "metals/didFocusTextDocument",
+  "params": "jdt://contents/akka-stream_2.12-2.6.12.jar/akka.stream.javadsl/Source.class?%3Dakka-grpc-quickstart-java%2F%5C%2Froot%5C%2F.gradle%5C%2Fcaches%5C%2Fmodules-2%5C%2Ffiles-2.1%5C%2Fcom.typesafe.akka%5C%2Fakka-stream_2.12%5C%2F2.6.12%5C%2F39d8b3cebf02d820f145da78066c0cba2d3a1655%5C%2Fakka-stream_2.12-2.6.12.jar%3D%2Fgradle_used_by_scope%3D%2Fmain%2Ctest%3D%2F%3Cakka.stream.javadsl%28Source.class"
+}
+java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
+	at org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint.lambda$null$0(GenericEndpoint.java:67)
+	at org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint.notify(GenericEndpoint.java:152)
+	at org.eclipse.lsp4j.jsonrpc.RemoteEndpoint.handleNotification(RemoteEndpoint.java:220)
+	at org.eclipse.lsp4j.jsonrpc.RemoteEndpoint.consume(RemoteEndpoint.java:187)
+	at org.eclipse.lsp4j.jsonrpc.json.StreamMessageProducer.handleMessage(StreamMessageProducer.java:194)
+	at org.eclipse.lsp4j.jsonrpc.json.StreamMessageProducer.listen(StreamMessageProducer.java:94)
+	at org.eclipse.lsp4j.jsonrpc.json.ConcurrentMessageProcessor.run(ConcurrentMessageProcessor.java:113)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+Caused by: java.lang.reflect.InvocationTargetException
+	at jdk.internal.reflect.GeneratedMethodAccessor3.invoke(Unknown Source)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint.lambda$null$0(GenericEndpoint.java:65)
+	... 11 more
+Caused by: java.nio.file.FileSystemNotFoundException: Provider "jdt" not installed
+	at java.base/java.nio.file.Path.of(Path.java:212)
+	at java.base/java.nio.file.Paths.get(Paths.java:97)
+	at scala.meta.internal.metals.MetalsEnrichments$XtensionString.toAbsolutePath(MetalsEnrichments.scala:416)
+	at scala.meta.internal.metals.MetalsLanguageServer.didFocus(MetalsLanguageServer.scala:712)
+	... 15 more
+
+INFO  shutting down Metals
+INFO  started: Metals version 0.8.3 in workspace '/home/sleipnir/development/workspace/pessoal/eigr/akka-grpc-quickstart-java'
+INFO  time: initialize in 1.43s
+INFO  skipping build import with status 'Requested'
+fev 17, 2021 8:17:22 PM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFORMAÇÕES: Unsupported notification method: $/setTraceNotification
+INFO  shutting down Metals
