@@ -1,8 +1,12 @@
 syntax = "proto3";
 
+option csharp_namespace = "Io.Eigr.Astreu.Manager";
+
 option java_multiple_files = true;
 option java_package = "io.eigr.astreu.manager";
 option java_outer_classname = "ManagerProto";
+
+option optimize_for = SPEED;
 
 package astreu.manager;
 
@@ -27,4 +31,3 @@ service TopicService {
 
     rpc Create(Topic) returns (TopicInfo) {}
 }
-

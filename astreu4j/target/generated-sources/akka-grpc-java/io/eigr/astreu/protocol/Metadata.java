@@ -7,13 +7,13 @@ package io.eigr.astreu.protocol;
  * <pre>
  * In the associated metadata there are some types of messages.
  * They may contain:
- *     replyTo:     Attribute used by the message producer to 
+ *     replyTo:     Attribute used by the message producer to
  *                  indicate on which topic a possible reply should be addressed. (Optional).
- *     correlation: Must be used when replyTo is defined to identify via uuid 
- *                  which original message is being answered by that current message. 
+ *     correlation: Must be used when replyTo is defined to identify via uuid
+ *                  which original message is being answered by that current message.
  *                  (Required if replyTo is set)
  *     properties:  A map of various or customized properties. (Optional).
- *     timestamp:   The timestamp of the creation of this message. (Required). 
+ *     timestamp:   The timestamp of the creation of this message. (Required).
  * </pre>
  *
  * Protobuf type {@code astreu.protocol.Metadata}
@@ -575,13 +575,13 @@ private static final long serialVersionUID = 0L;
    * <pre>
    * In the associated metadata there are some types of messages.
    * They may contain:
-   *     replyTo:     Attribute used by the message producer to 
+   *     replyTo:     Attribute used by the message producer to
    *                  indicate on which topic a possible reply should be addressed. (Optional).
-   *     correlation: Must be used when replyTo is defined to identify via uuid 
-   *                  which original message is being answered by that current message. 
+   *     correlation: Must be used when replyTo is defined to identify via uuid
+   *                  which original message is being answered by that current message.
    *                  (Required if replyTo is set)
    *     properties:  A map of various or customized properties. (Optional).
-   *     timestamp:   The timestamp of the creation of this message. (Required). 
+   *     timestamp:   The timestamp of the creation of this message. (Required).
    * </pre>
    *
    * Protobuf type {@code astreu.protocol.Metadata}

@@ -1,8 +1,12 @@
 syntax = "proto3";
 
+option csharp_namespace = "Io.Eigr.Astreu.Protocol";
+
 option java_multiple_files = true;
 option java_package = "io.eigr.astreu.protocol";
 option java_outer_classname = "ProtocolProto";
+
+option optimize_for = SPEED;
 
 package astreu.protocol;
 
@@ -12,13 +16,13 @@ import "google/protobuf/timestamp.proto";
 /*
  * In the associated metadata there are some types of messages.
  * They may contain:
- *     replyTo:     Attribute used by the message producer to 
+ *     replyTo:     Attribute used by the message producer to
  *                  indicate on which topic a possible reply should be addressed. (Optional).
- *     correlation: Must be used when replyTo is defined to identify via uuid 
- *                  which original message is being answered by that current message. 
+ *     correlation: Must be used when replyTo is defined to identify via uuid
+ *                  which original message is being answered by that current message.
  *                  (Required if replyTo is set)
  *     properties:  A map of various or customized properties. (Optional).
- *     timestamp:   The timestamp of the creation of this message. (Required). 
+ *     timestamp:   The timestamp of the creation of this message. (Required).
  **/
 message Metadata {
   string topic = 1;
@@ -30,8 +34,8 @@ message Metadata {
 
 /*
  * System information message.
- * It can be used, for example, to indicate the number of servers 
- * added or removed to the cluster. 
+ * It can be used, for example, to indicate the number of servers
+ * added or removed to the cluster.
  **/
 message Info {
   string uuid = 1;
@@ -42,10 +46,10 @@ message Info {
 /*
  * System message to indicate any type of failure that occurred during message processing.
  * A failure can be of two types:
- *      FATAL:     If the Broker sends a failure of this type, it is recommended that the client 
- *                 finish the current gRPC stream and try to reconnect later because there is no 
+ *      FATAL:     If the Broker sends a failure of this type, it is recommended that the client
+ *                 finish the current gRPC stream and try to reconnect later because there is no
  *                 guarantee that this stream will be healthy.
- *      TRANSIENT: A transient failure indicates a failure during the processing of a specific message, 
+ *      TRANSIENT: A transient failure indicates a failure during the processing of a specific message,
  *                 indicating for example that certain validations of the message did not occur successfully.
  *
  * A failure message must contain the following attributes:
@@ -66,21 +70,21 @@ message Failure {
 }
 
 /*
- * Connect must be used by both consumers and producers to establish a persistent connection with the Broker. 
- * This message must be the first message sent in a gRPC stream established with the Broker 
- * and serves to register both subscribers and producers. 
+ * Connect must be used by both consumers and producers to establish a persistent connection with the Broker.
+ * This message must be the first message sent in a gRPC stream established with the Broker
+ * and serves to register both subscribers and producers.
  **/
 message Connect {
   string uuid = 1; // Unique identifier
-  string topic = 2; // name of a topic to register. 
-                    // can be created in advance or dynamically (if the topic does not exist at the time of connection it will be created) 
+  string topic = 2; // name of a topic to register.
+  // can be created in advance or dynamically (if the topic does not exist at the time of connection it will be created)
   string subscription = 3; // name of subscription. (both consumers and producers must provide a unique registration name )
-  map<string, string> properties = 4; // A property map can be passed to the Broker in order to make some type of configuration 
-  google.protobuf.Timestamp timestamp = 5; // Moment of message creation 
+  map<string, string> properties = 4; // A property map can be passed to the Broker in order to make some type of configuration
+  google.protobuf.Timestamp timestamp = 5; // Moment of message creation
 }
 
 /*
- * Disconnect serves when the customer wants to end a stream in a controlled manner. 
+ * Disconnect serves when the customer wants to end a stream in a controlled manner.
  **/
 message Disconnect {
   string uuid = 1; // Unique identifier
@@ -107,7 +111,7 @@ message System {
 
 /*
  * Exchange is a type of message used to exchange information between producers and consumers.
- * It has a uuid field, a metadata field (see Metadata) and an attribute containing the message payload. 
+ * It has a uuid field, a metadata field (see Metadata) and an attribute containing the message payload.
  **/
 message Exchange {
   string uuid = 1; // Unique identifier of a ack message.
@@ -117,21 +121,21 @@ message Exchange {
 
 /*
  * Ack is used for confirmation of sending or receiving messages.
- * When a customer connects and receives a message, 
- * he must confirm receipt of the message by sending an 'Ack' message stating the reason for the confirmation. 
+ * When a customer connects and receives a message,
+ * he must confirm receipt of the message by sending an 'Ack' message stating the reason for the confirmation.
  * Can be:
  *    ACCEPT:    When the message is received and probably successfully processed.
- *    REJECT:    When the message was received but it was probably not processed successfully. 
- *               The message will be maintained by the Broker for a later delivery attempt. 
+ *    REJECT:    When the message was received but it was probably not processed successfully.
+ *               The message will be maintained by the Broker for a later delivery attempt.
  *              (Only when the publishing adapter is of the persistent type)
- *    KNOWLEDGE: Similar to the ACCEPT type but has slightly different semantics, 
- *               meaning that no action should be taken between the parties. 
- *               Used to exchange System messages or when the Broker wishes 
+ *    KNOWLEDGE: Similar to the ACCEPT type but has slightly different semantics,
+ *               meaning that no action should be taken between the parties.
+ *               Used to exchange System messages or when the Broker wishes
  *               to inform the producer that the message has been forwarded for delivery.
- * 
- * Unlike other messaging systems Astreu will always inform the producer of the message 
- * about the receipt of receipt from consumers. Thus giving more transparency and control 
- * to producers about what actually happened with the message that was sent and when it happened. 
+ *
+ * Unlike other messaging systems Astreu will always inform the producer of the message
+ * about the receipt of receipt from consumers. Thus giving more transparency and control
+ * to producers about what actually happened with the message that was sent and when it happened.
  **/
 message Ack {
   enum Reason {
@@ -142,17 +146,17 @@ message Ack {
 
   string uuid = 1; // Unique identifier of a ack message
   Reason reason = 2; // Reason of the message confirmation
-  Metadata metadata = 3; // Metadata. Must contain the original message uuid in the 'correlation' attribute 
-  string subscription = 4; // Subscription identifier 
+  Metadata metadata = 3; // Metadata. Must contain the original message uuid in the 'correlation' attribute
+  string subscription = 4; // Subscription identifier
 }
 
 /*
- * Message is a box for various sub types of messages 
- * that can be exchanged between the clients and the Broker via gRPC stream channel. 
+ * Message is a box for various sub types of messages
+ * that can be exchanged between the clients and the Broker via gRPC stream channel.
  * It can currently contain one of three message types:
  *     System: System messages, such as Connect and Disconnect, among others (see System).
  *     Exchange: The useful message between producers and consumers (see Exchange)
- *     Ack: A receipt confirmation message (see Ack) 
+ *     Ack: A receipt confirmation message (see Ack)
  **/
 message Message {
   oneof data {

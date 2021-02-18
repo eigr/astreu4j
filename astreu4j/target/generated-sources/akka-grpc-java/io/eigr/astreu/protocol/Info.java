@@ -6,8 +6,8 @@ package io.eigr.astreu.protocol;
 /**
  * <pre>
  * System information message.
- * It can be used, for example, to indicate the number of servers 
- * added or removed to the cluster. 
+ * It can be used, for example, to indicate the number of servers
+ * added or removed to the cluster.
  * </pre>
  *
  * Protobuf type {@code astreu.protocol.Info}
@@ -462,8 +462,8 @@ private static final long serialVersionUID = 0L;
   /**
    * <pre>
    * System information message.
-   * It can be used, for example, to indicate the number of servers 
-   * added or removed to the cluster. 
+   * It can be used, for example, to indicate the number of servers
+   * added or removed to the cluster.
    * </pre>
    *
    * Protobuf type {@code astreu.protocol.Info}

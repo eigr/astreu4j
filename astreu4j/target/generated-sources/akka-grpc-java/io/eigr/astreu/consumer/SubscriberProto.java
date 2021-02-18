@@ -29,8 +29,9 @@ public final class SubscriberProto {
       "scriber\022E\n\tSubscribe\022\030.astreu.protocol.M" +
       "essage\032\030.astreu.protocol.Message\"\000(\0010\001\022A" +
       "\n\013Unsubscribe\022\030.astreu.protocol.Message\032" +
-      "\026.google.protobuf.Empty\"\000B,\n\027io.eigr.ast" +
-      "reu.consumerB\017SubscriberProtoP\001b\006proto3"
+      "\026.google.protobuf.Empty\"\000BH\n\027io.eigr.ast" +
+      "reu.consumerB\017SubscriberProtoH\001P\001\252\002\027Io.E" +
+      "igr.Astreu.Consumerb\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,

@@ -6,21 +6,20 @@ package io.eigr.astreu.protocol;
 /**
  * <pre>
  * Ack is used for confirmation of sending or receiving messages.
- * When a customer connects and receives a message, 
- * he must confirm receipt of the message by sending an 'Ack' message stating the reason for the confirmation. 
+ * When a customer connects and receives a message,
+ * he must confirm receipt of the message by sending an 'Ack' message stating the reason for the confirmation.
  * Can be:
  *    ACCEPT:    When the message is received and probably successfully processed.
- *    REJECT:    When the message was received but it was probably not processed successfully. 
- *               The message will be maintained by the Broker for a later delivery attempt. 
+ *    REJECT:    When the message was received but it was probably not processed successfully.
+ *               The message will be maintained by the Broker for a later delivery attempt.
  *              (Only when the publishing adapter is of the persistent type)
- *    KNOWLEDGE: Similar to the ACCEPT type but has slightly different semantics, 
- *               meaning that no action should be taken between the parties. 
- *               Used to exchange System messages or when the Broker wishes 
+ *    KNOWLEDGE: Similar to the ACCEPT type but has slightly different semantics,
+ *               meaning that no action should be taken between the parties.
+ *               Used to exchange System messages or when the Broker wishes
  *               to inform the producer that the message has been forwarded for delivery.
- * 
- * Unlike other messaging systems Astreu will always inform the producer of the message 
- * about the receipt of receipt from consumers. Thus giving more transparency and control 
- * to producers about what actually happened with the message that was sent and when it happened. 
+ * Unlike other messaging systems Astreu will always inform the producer of the message
+ * about the receipt of receipt from consumers. Thus giving more transparency and control
+ * to producers about what actually happened with the message that was sent and when it happened.
  * </pre>
  *
  * Protobuf type {@code astreu.protocol.Ack}
@@ -321,7 +320,7 @@ private static final long serialVersionUID = 0L;
   private io.eigr.astreu.protocol.Metadata metadata_;
   /**
    * <pre>
-   * Metadata. Must contain the original message uuid in the 'correlation' attribute 
+   * Metadata. Must contain the original message uuid in the 'correlation' attribute
    * </pre>
    *
    * <code>.astreu.protocol.Metadata metadata = 3;</code>
@@ -332,7 +331,7 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   * Metadata. Must contain the original message uuid in the 'correlation' attribute 
+   * Metadata. Must contain the original message uuid in the 'correlation' attribute
    * </pre>
    *
    * <code>.astreu.protocol.Metadata metadata = 3;</code>
@@ -343,7 +342,7 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   * Metadata. Must contain the original message uuid in the 'correlation' attribute 
+   * Metadata. Must contain the original message uuid in the 'correlation' attribute
    * </pre>
    *
    * <code>.astreu.protocol.Metadata metadata = 3;</code>
@@ -356,7 +355,7 @@ private static final long serialVersionUID = 0L;
   private volatile java.lang.Object subscription_;
   /**
    * <pre>
-   * Subscription identifier 
+   * Subscription identifier
    * </pre>
    *
    * <code>string subscription = 4;</code>
@@ -376,7 +375,7 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   * Subscription identifier 
+   * Subscription identifier
    * </pre>
    *
    * <code>string subscription = 4;</code>
@@ -589,21 +588,20 @@ private static final long serialVersionUID = 0L;
   /**
    * <pre>
    * Ack is used for confirmation of sending or receiving messages.
-   * When a customer connects and receives a message, 
-   * he must confirm receipt of the message by sending an 'Ack' message stating the reason for the confirmation. 
+   * When a customer connects and receives a message,
+   * he must confirm receipt of the message by sending an 'Ack' message stating the reason for the confirmation.
    * Can be:
    *    ACCEPT:    When the message is received and probably successfully processed.
-   *    REJECT:    When the message was received but it was probably not processed successfully. 
-   *               The message will be maintained by the Broker for a later delivery attempt. 
+   *    REJECT:    When the message was received but it was probably not processed successfully.
+   *               The message will be maintained by the Broker for a later delivery attempt.
    *              (Only when the publishing adapter is of the persistent type)
-   *    KNOWLEDGE: Similar to the ACCEPT type but has slightly different semantics, 
-   *               meaning that no action should be taken between the parties. 
-   *               Used to exchange System messages or when the Broker wishes 
+   *    KNOWLEDGE: Similar to the ACCEPT type but has slightly different semantics,
+   *               meaning that no action should be taken between the parties.
+   *               Used to exchange System messages or when the Broker wishes
    *               to inform the producer that the message has been forwarded for delivery.
-   * 
-   * Unlike other messaging systems Astreu will always inform the producer of the message 
-   * about the receipt of receipt from consumers. Thus giving more transparency and control 
-   * to producers about what actually happened with the message that was sent and when it happened. 
+   * Unlike other messaging systems Astreu will always inform the producer of the message
+   * about the receipt of receipt from consumers. Thus giving more transparency and control
+   * to producers about what actually happened with the message that was sent and when it happened.
    * </pre>
    *
    * Protobuf type {@code astreu.protocol.Ack}
@@ -953,7 +951,7 @@ private static final long serialVersionUID = 0L;
         io.eigr.astreu.protocol.Metadata, io.eigr.astreu.protocol.Metadata.Builder, io.eigr.astreu.protocol.MetadataOrBuilder> metadataBuilder_;
     /**
      * <pre>
-     * Metadata. Must contain the original message uuid in the 'correlation' attribute 
+     * Metadata. Must contain the original message uuid in the 'correlation' attribute
      * </pre>
      *
      * <code>.astreu.protocol.Metadata metadata = 3;</code>
@@ -964,7 +962,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Metadata. Must contain the original message uuid in the 'correlation' attribute 
+     * Metadata. Must contain the original message uuid in the 'correlation' attribute
      * </pre>
      *
      * <code>.astreu.protocol.Metadata metadata = 3;</code>
@@ -979,7 +977,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Metadata. Must contain the original message uuid in the 'correlation' attribute 
+     * Metadata. Must contain the original message uuid in the 'correlation' attribute
      * </pre>
      *
      * <code>.astreu.protocol.Metadata metadata = 3;</code>
@@ -999,7 +997,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Metadata. Must contain the original message uuid in the 'correlation' attribute 
+     * Metadata. Must contain the original message uuid in the 'correlation' attribute
      * </pre>
      *
      * <code>.astreu.protocol.Metadata metadata = 3;</code>
@@ -1017,7 +1015,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Metadata. Must contain the original message uuid in the 'correlation' attribute 
+     * Metadata. Must contain the original message uuid in the 'correlation' attribute
      * </pre>
      *
      * <code>.astreu.protocol.Metadata metadata = 3;</code>
@@ -1039,7 +1037,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Metadata. Must contain the original message uuid in the 'correlation' attribute 
+     * Metadata. Must contain the original message uuid in the 'correlation' attribute
      * </pre>
      *
      * <code>.astreu.protocol.Metadata metadata = 3;</code>
@@ -1057,7 +1055,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Metadata. Must contain the original message uuid in the 'correlation' attribute 
+     * Metadata. Must contain the original message uuid in the 'correlation' attribute
      * </pre>
      *
      * <code>.astreu.protocol.Metadata metadata = 3;</code>
@@ -1069,7 +1067,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Metadata. Must contain the original message uuid in the 'correlation' attribute 
+     * Metadata. Must contain the original message uuid in the 'correlation' attribute
      * </pre>
      *
      * <code>.astreu.protocol.Metadata metadata = 3;</code>
@@ -1084,7 +1082,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Metadata. Must contain the original message uuid in the 'correlation' attribute 
+     * Metadata. Must contain the original message uuid in the 'correlation' attribute
      * </pre>
      *
      * <code>.astreu.protocol.Metadata metadata = 3;</code>
@@ -1106,7 +1104,7 @@ private static final long serialVersionUID = 0L;
     private java.lang.Object subscription_ = "";
     /**
      * <pre>
-     * Subscription identifier 
+     * Subscription identifier
      * </pre>
      *
      * <code>string subscription = 4;</code>
@@ -1126,7 +1124,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Subscription identifier 
+     * Subscription identifier
      * </pre>
      *
      * <code>string subscription = 4;</code>
@@ -1147,7 +1145,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Subscription identifier 
+     * Subscription identifier
      * </pre>
      *
      * <code>string subscription = 4;</code>
@@ -1166,7 +1164,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Subscription identifier 
+     * Subscription identifier
      * </pre>
      *
      * <code>string subscription = 4;</code>
@@ -1180,7 +1178,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Subscription identifier 
+     * Subscription identifier
      * </pre>
      *
      * <code>string subscription = 4;</code>

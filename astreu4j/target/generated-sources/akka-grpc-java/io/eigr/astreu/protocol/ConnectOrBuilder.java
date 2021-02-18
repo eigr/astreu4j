@@ -29,7 +29,7 @@ public interface ConnectOrBuilder extends
 
   /**
    * <pre>
-   * name of a topic to register. 
+   * name of a topic to register.
    * </pre>
    *
    * <code>string topic = 2;</code>
@@ -38,7 +38,7 @@ public interface ConnectOrBuilder extends
   java.lang.String getTopic();
   /**
    * <pre>
-   * name of a topic to register. 
+   * name of a topic to register.
    * </pre>
    *
    * <code>string topic = 2;</code>
@@ -49,7 +49,7 @@ public interface ConnectOrBuilder extends
 
   /**
    * <pre>
-   * can be created in advance or dynamically (if the topic does not exist at the time of connection it will be created) 
+   * can be created in advance or dynamically (if the topic does not exist at the time of connection it will be created)
    * </pre>
    *
    * <code>string subscription = 3;</code>
@@ -58,7 +58,7 @@ public interface ConnectOrBuilder extends
   java.lang.String getSubscription();
   /**
    * <pre>
-   * can be created in advance or dynamically (if the topic does not exist at the time of connection it will be created) 
+   * can be created in advance or dynamically (if the topic does not exist at the time of connection it will be created)
    * </pre>
    *
    * <code>string subscription = 3;</code>
@@ -69,7 +69,7 @@ public interface ConnectOrBuilder extends
 
   /**
    * <pre>
-   * A property map can be passed to the Broker in order to make some type of configuration 
+   * A property map can be passed to the Broker in order to make some type of configuration
    * </pre>
    *
    * <code>map&lt;string, string&gt; properties = 4;</code>
@@ -77,7 +77,7 @@ public interface ConnectOrBuilder extends
   int getPropertiesCount();
   /**
    * <pre>
-   * A property map can be passed to the Broker in order to make some type of configuration 
+   * A property map can be passed to the Broker in order to make some type of configuration
    * </pre>
    *
    * <code>map&lt;string, string&gt; properties = 4;</code>
@@ -92,7 +92,7 @@ public interface ConnectOrBuilder extends
   getProperties();
   /**
    * <pre>
-   * A property map can be passed to the Broker in order to make some type of configuration 
+   * A property map can be passed to the Broker in order to make some type of configuration
    * </pre>
    *
    * <code>map&lt;string, string&gt; properties = 4;</code>
@@ -101,7 +101,7 @@ public interface ConnectOrBuilder extends
   getPropertiesMap();
   /**
    * <pre>
-   * A property map can be passed to the Broker in order to make some type of configuration 
+   * A property map can be passed to the Broker in order to make some type of configuration
    * </pre>
    *
    * <code>map&lt;string, string&gt; properties = 4;</code>
@@ -112,7 +112,7 @@ public interface ConnectOrBuilder extends
       java.lang.String defaultValue);
   /**
    * <pre>
-   * A property map can be passed to the Broker in order to make some type of configuration 
+   * A property map can be passed to the Broker in order to make some type of configuration
    * </pre>
    *
    * <code>map&lt;string, string&gt; properties = 4;</code>
@@ -123,7 +123,7 @@ public interface ConnectOrBuilder extends
 
   /**
    * <pre>
-   * Moment of message creation 
+   * Moment of message creation
    * </pre>
    *
    * <code>.google.protobuf.Timestamp timestamp = 5;</code>
@@ -132,7 +132,7 @@ public interface ConnectOrBuilder extends
   boolean hasTimestamp();
   /**
    * <pre>
-   * Moment of message creation 
+   * Moment of message creation
    * </pre>
    *
    * <code>.google.protobuf.Timestamp timestamp = 5;</code>
@@ -141,7 +141,7 @@ public interface ConnectOrBuilder extends
   com.google.protobuf.Timestamp getTimestamp();
   /**
    * <pre>
-   * Moment of message creation 
+   * Moment of message creation
    * </pre>
    *
    * <code>.google.protobuf.Timestamp timestamp = 5;</code>

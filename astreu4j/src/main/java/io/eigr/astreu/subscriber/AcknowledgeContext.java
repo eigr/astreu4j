@@ -15,14 +15,14 @@ import java.util.UUID;
 
 public final class AcknowledgeContext implements SubscriptionContext {
 
-    private final Logger log;
     private final Exchange exchange;
     private final String subscription;
+    private final ActorSystem<Void> system;
     private final EmitterProcessor<Message> stream;
 
     public AcknowledgeContext(ActorSystem<Void> system, String subscription, Exchange exchange, EmitterProcessor<Message> stream) {
         this.stream = stream;
-        this.log = system.log();
+        this.system = system;
         this.exchange = exchange;
         this.subscription = subscription;
     }
@@ -60,11 +60,6 @@ public final class AcknowledgeContext implements SubscriptionContext {
     }
 
     @Override
-    public void accept(String reason) {
-
-    }
-
-    @Override
     public void reject() {
         Instant time = Instant.now();
         stream.onNext(Message.newBuilder()
@@ -79,12 +74,7 @@ public final class AcknowledgeContext implements SubscriptionContext {
     }
 
     @Override
-    public void reject(String reason) {
-
-    }
-
-    @Override
-    public Logger getLogger() {
-        return log;
+    public Logger logger() {
+        return this.system.log();
     }
 }

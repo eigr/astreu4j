@@ -51,8 +51,9 @@ public final class ManagerProto {
       "picInfo\"\000\0227\n\004Drop\022\025.astreu.manager.Topic" +
       "\032\026.google.protobuf.Empty\"\000\022<\n\006Create\022\025.a" +
       "streu.manager.Topic\032\031.astreu.manager.Top" +
-      "icInfo\"\000B(\n\026io.eigr.astreu.managerB\014Mana" +
-      "gerProtoP\001b\006proto3"
+      "icInfo\"\000BC\n\026io.eigr.astreu.managerB\014Mana" +
+      "gerProtoH\001P\001\252\002\026Io.Eigr.Astreu.Managerb\006p" +
+      "roto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,

@@ -13,16 +13,15 @@ import io.eigr.astreu.consumer.SubscriberClient;
 import io.eigr.astreu.protocol.System;
 import io.eigr.astreu.protocol.*;
 import org.reactivestreams.Publisher;
-import org.slf4j.Logger;
 import reactor.core.publisher.EmitterProcessor;
 
+import java.util.Objects;
 import java.util.UUID;
 
 public final class DefaultSubscriber implements Subscriber {
     private static final EmitterProcessor<Message> stream = EmitterProcessor.<Message>create();
     private static final Source<Message, NotUsed> requestStream = Source.fromPublisher(stream);
 
-    private final Logger log;
     private final String topic;
     private final Config config;
     private final String connectionId;
@@ -32,18 +31,17 @@ public final class DefaultSubscriber implements Subscriber {
     private final Source<Message, NotUsed> responseStream;
 
     public DefaultSubscriber(String topic, String subscription, ActorSystem<Void> system, Config config) {
-        this.log = system.log();
+        Objects.requireNonNull(topic, "Topic is mandatory");
+        Objects.requireNonNull(config, "Config not be null");
+        Objects.requireNonNull(system, "ActorSystem not be null");
+        Objects.requireNonNull(subscription, "Subscription is mandatory");
         this.topic = topic;
-        this.subscription = subscription;
         this.system = system;
         this.config = config;
-        this.connectionId = UUID.randomUUID().toString().toLowerCase();
-        this.client = SubscriberClient.create(
-                GrpcClientSettings.connectToServiceAt(config.getHost(), config.getPort(), system)
-                        .withTls(config.getOptions().isUseTls()),
-                system
-        );
+        this.subscription = subscription;
+        this.client = getClient(system, config);
         this.responseStream = client.subscribe(requestStream);
+        this.connectionId = UUID.randomUUID().toString().toLowerCase();
     }
 
     @Override
@@ -60,34 +58,9 @@ public final class DefaultSubscriber implements Subscriber {
                                 )
                                 .build())
                 .build());
-
         return responseStream
-                .map(incoming -> {
-                    final Message.DataCase dataCase = incoming.getDataCase();
-                    Exchange exchange = null;
-                    switch (dataCase) {
-                        case SYSTEM:
-                            final System sys = incoming.getSystem();
-                            log.debug("In System Message {}", sys);
-                            break;
-                        case EXCHANGE:
-                            exchange = incoming.getExchange();
-                            log.debug("In Exchange Message {}", exchange);
-                            break;
-                        case ACK:
-                            final Ack ack = incoming.getAck();
-                            log.debug("In Ack Message {}", ack);
-                            break;
-                        case DATA_NOT_SET:
-                            log.warn("In No Data Message!");
-                            break;
-                        default:
-                            // code block
-                    }
-                    return new MessageWithContext(
-                            new AcknowledgeContext(system, subscription, exchange, stream),
-                            exchange);
-                })
+                .map(this::createMessageWithContext)
+                .filter(msg -> Objects.nonNull(msg.getExchange()))
                 .runWith(Sink.asPublisher(AsPublisher.WITHOUT_FANOUT), system);
     }
 
@@ -101,6 +74,41 @@ public final class DefaultSubscriber implements Subscriber {
 
     public String getSubscription() {
         return subscription;
+    }
+
+    private SubscriberClient getClient(ActorSystem<Void> system, Config config) {
+        return SubscriberClient.create(
+                GrpcClientSettings.connectToServiceAt(config.getHost(), config.getPort(), system)
+                        .withTls(config.getOptions().isUseTls()),
+                system
+        );
+    }
+    
+    private MessageWithContext createMessageWithContext(Message incoming) {
+        final Message.DataCase dataCase = incoming.getDataCase();
+        Exchange exchange = null;
+        switch (dataCase) {
+            case SYSTEM:
+                final System sys = incoming.getSystem();
+                system.log().debug("System Message {}", sys);
+                break;
+            case EXCHANGE:
+                exchange = incoming.getExchange();
+                system.log().debug("Exchange Message {}", exchange);
+                break;
+            case ACK:
+                final Ack ack = incoming.getAck();
+                system.log().debug("Ack Message {}", ack);
+                break;
+            case DATA_NOT_SET:
+                system.log().warn("No Data Message!");
+                break;
+            default:
+                // code block
+        }
+        return new MessageWithContext(
+                new AcknowledgeContext(system, subscription, exchange, stream),
+                exchange);
     }
 
 }

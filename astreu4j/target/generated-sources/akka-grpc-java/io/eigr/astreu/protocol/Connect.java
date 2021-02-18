@@ -5,9 +5,9 @@ package io.eigr.astreu.protocol;
 
 /**
  * <pre>
- * Connect must be used by both consumers and producers to establish a persistent connection with the Broker. 
- * This message must be the first message sent in a gRPC stream established with the Broker 
- * and serves to register both subscribers and producers. 
+ * Connect must be used by both consumers and producers to establish a persistent connection with the Broker.
+ * This message must be the first message sent in a gRPC stream established with the Broker
+ * and serves to register both subscribers and producers.
  * </pre>
  *
  * Protobuf type {@code astreu.protocol.Connect}
@@ -194,7 +194,7 @@ private static final long serialVersionUID = 0L;
   private volatile java.lang.Object topic_;
   /**
    * <pre>
-   * name of a topic to register. 
+   * name of a topic to register.
    * </pre>
    *
    * <code>string topic = 2;</code>
@@ -214,7 +214,7 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   * name of a topic to register. 
+   * name of a topic to register.
    * </pre>
    *
    * <code>string topic = 2;</code>
@@ -238,7 +238,7 @@ private static final long serialVersionUID = 0L;
   private volatile java.lang.Object subscription_;
   /**
    * <pre>
-   * can be created in advance or dynamically (if the topic does not exist at the time of connection it will be created) 
+   * can be created in advance or dynamically (if the topic does not exist at the time of connection it will be created)
    * </pre>
    *
    * <code>string subscription = 3;</code>
@@ -258,7 +258,7 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   * can be created in advance or dynamically (if the topic does not exist at the time of connection it will be created) 
+   * can be created in advance or dynamically (if the topic does not exist at the time of connection it will be created)
    * </pre>
    *
    * <code>string subscription = 3;</code>
@@ -306,7 +306,7 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   * A property map can be passed to the Broker in order to make some type of configuration 
+   * A property map can be passed to the Broker in order to make some type of configuration
    * </pre>
    *
    * <code>map&lt;string, string&gt; properties = 4;</code>
@@ -326,7 +326,7 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   * A property map can be passed to the Broker in order to make some type of configuration 
+   * A property map can be passed to the Broker in order to make some type of configuration
    * </pre>
    *
    * <code>map&lt;string, string&gt; properties = 4;</code>
@@ -337,7 +337,7 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   * A property map can be passed to the Broker in order to make some type of configuration 
+   * A property map can be passed to the Broker in order to make some type of configuration
    * </pre>
    *
    * <code>map&lt;string, string&gt; properties = 4;</code>
@@ -353,7 +353,7 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   * A property map can be passed to the Broker in order to make some type of configuration 
+   * A property map can be passed to the Broker in order to make some type of configuration
    * </pre>
    *
    * <code>map&lt;string, string&gt; properties = 4;</code>
@@ -374,7 +374,7 @@ private static final long serialVersionUID = 0L;
   private com.google.protobuf.Timestamp timestamp_;
   /**
    * <pre>
-   * Moment of message creation 
+   * Moment of message creation
    * </pre>
    *
    * <code>.google.protobuf.Timestamp timestamp = 5;</code>
@@ -385,7 +385,7 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   * Moment of message creation 
+   * Moment of message creation
    * </pre>
    *
    * <code>.google.protobuf.Timestamp timestamp = 5;</code>
@@ -396,7 +396,7 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   * Moment of message creation 
+   * Moment of message creation
    * </pre>
    *
    * <code>.google.protobuf.Timestamp timestamp = 5;</code>
@@ -619,9 +619,9 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   * Connect must be used by both consumers and producers to establish a persistent connection with the Broker. 
-   * This message must be the first message sent in a gRPC stream established with the Broker 
-   * and serves to register both subscribers and producers. 
+   * Connect must be used by both consumers and producers to establish a persistent connection with the Broker.
+   * This message must be the first message sent in a gRPC stream established with the Broker
+   * and serves to register both subscribers and producers.
    * </pre>
    *
    * Protobuf type {@code astreu.protocol.Connect}
@@ -927,7 +927,7 @@ private static final long serialVersionUID = 0L;
     private java.lang.Object topic_ = "";
     /**
      * <pre>
-     * name of a topic to register. 
+     * name of a topic to register.
      * </pre>
      *
      * <code>string topic = 2;</code>
@@ -947,7 +947,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * name of a topic to register. 
+     * name of a topic to register.
      * </pre>
      *
      * <code>string topic = 2;</code>
@@ -968,7 +968,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * name of a topic to register. 
+     * name of a topic to register.
      * </pre>
      *
      * <code>string topic = 2;</code>
@@ -987,7 +987,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * name of a topic to register. 
+     * name of a topic to register.
      * </pre>
      *
      * <code>string topic = 2;</code>
@@ -1001,7 +1001,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * name of a topic to register. 
+     * name of a topic to register.
      * </pre>
      *
      * <code>string topic = 2;</code>
@@ -1023,7 +1023,7 @@ private static final long serialVersionUID = 0L;
     private java.lang.Object subscription_ = "";
     /**
      * <pre>
-     * can be created in advance or dynamically (if the topic does not exist at the time of connection it will be created) 
+     * can be created in advance or dynamically (if the topic does not exist at the time of connection it will be created)
      * </pre>
      *
      * <code>string subscription = 3;</code>
@@ -1043,7 +1043,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * can be created in advance or dynamically (if the topic does not exist at the time of connection it will be created) 
+     * can be created in advance or dynamically (if the topic does not exist at the time of connection it will be created)
      * </pre>
      *
      * <code>string subscription = 3;</code>
@@ -1064,7 +1064,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * can be created in advance or dynamically (if the topic does not exist at the time of connection it will be created) 
+     * can be created in advance or dynamically (if the topic does not exist at the time of connection it will be created)
      * </pre>
      *
      * <code>string subscription = 3;</code>
@@ -1083,7 +1083,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * can be created in advance or dynamically (if the topic does not exist at the time of connection it will be created) 
+     * can be created in advance or dynamically (if the topic does not exist at the time of connection it will be created)
      * </pre>
      *
      * <code>string subscription = 3;</code>
@@ -1097,7 +1097,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * can be created in advance or dynamically (if the topic does not exist at the time of connection it will be created) 
+     * can be created in advance or dynamically (if the topic does not exist at the time of connection it will be created)
      * </pre>
      *
      * <code>string subscription = 3;</code>
@@ -1144,7 +1144,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * A property map can be passed to the Broker in order to make some type of configuration 
+     * A property map can be passed to the Broker in order to make some type of configuration
      * </pre>
      *
      * <code>map&lt;string, string&gt; properties = 4;</code>
@@ -1164,7 +1164,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * A property map can be passed to the Broker in order to make some type of configuration 
+     * A property map can be passed to the Broker in order to make some type of configuration
      * </pre>
      *
      * <code>map&lt;string, string&gt; properties = 4;</code>
@@ -1175,7 +1175,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * A property map can be passed to the Broker in order to make some type of configuration 
+     * A property map can be passed to the Broker in order to make some type of configuration
      * </pre>
      *
      * <code>map&lt;string, string&gt; properties = 4;</code>
@@ -1191,7 +1191,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * A property map can be passed to the Broker in order to make some type of configuration 
+     * A property map can be passed to the Broker in order to make some type of configuration
      * </pre>
      *
      * <code>map&lt;string, string&gt; properties = 4;</code>
@@ -1215,7 +1215,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * A property map can be passed to the Broker in order to make some type of configuration 
+     * A property map can be passed to the Broker in order to make some type of configuration
      * </pre>
      *
      * <code>map&lt;string, string&gt; properties = 4;</code>
@@ -1238,7 +1238,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * A property map can be passed to the Broker in order to make some type of configuration 
+     * A property map can be passed to the Broker in order to make some type of configuration
      * </pre>
      *
      * <code>map&lt;string, string&gt; properties = 4;</code>
@@ -1254,7 +1254,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * A property map can be passed to the Broker in order to make some type of configuration 
+     * A property map can be passed to the Broker in order to make some type of configuration
      * </pre>
      *
      * <code>map&lt;string, string&gt; properties = 4;</code>
@@ -1272,7 +1272,7 @@ private static final long serialVersionUID = 0L;
         com.google.protobuf.Timestamp, com.google.protobuf.Timestamp.Builder, com.google.protobuf.TimestampOrBuilder> timestampBuilder_;
     /**
      * <pre>
-     * Moment of message creation 
+     * Moment of message creation
      * </pre>
      *
      * <code>.google.protobuf.Timestamp timestamp = 5;</code>
@@ -1283,7 +1283,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Moment of message creation 
+     * Moment of message creation
      * </pre>
      *
      * <code>.google.protobuf.Timestamp timestamp = 5;</code>
@@ -1298,7 +1298,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Moment of message creation 
+     * Moment of message creation
      * </pre>
      *
      * <code>.google.protobuf.Timestamp timestamp = 5;</code>
@@ -1318,7 +1318,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Moment of message creation 
+     * Moment of message creation
      * </pre>
      *
      * <code>.google.protobuf.Timestamp timestamp = 5;</code>
@@ -1336,7 +1336,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Moment of message creation 
+     * Moment of message creation
      * </pre>
      *
      * <code>.google.protobuf.Timestamp timestamp = 5;</code>
@@ -1358,7 +1358,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Moment of message creation 
+     * Moment of message creation
      * </pre>
      *
      * <code>.google.protobuf.Timestamp timestamp = 5;</code>
@@ -1376,7 +1376,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Moment of message creation 
+     * Moment of message creation
      * </pre>
      *
      * <code>.google.protobuf.Timestamp timestamp = 5;</code>
@@ -1388,7 +1388,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Moment of message creation 
+     * Moment of message creation
      * </pre>
      *
      * <code>.google.protobuf.Timestamp timestamp = 5;</code>
@@ -1403,7 +1403,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Moment of message creation 
+     * Moment of message creation
      * </pre>
      *
      * <code>.google.protobuf.Timestamp timestamp = 5;</code>

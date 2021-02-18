@@ -6,7 +6,7 @@ package io.eigr.astreu.protocol;
 /**
  * <pre>
  * Exchange is a type of message used to exchange information between producers and consumers.
- * It has a uuid field, a metadata field (see Metadata) and an attribute containing the message payload. 
+ * It has a uuid field, a metadata field (see Metadata) and an attribute containing the message payload.
  * </pre>
  *
  * Protobuf type {@code astreu.protocol.Exchange}
@@ -421,7 +421,7 @@ private static final long serialVersionUID = 0L;
   /**
    * <pre>
    * Exchange is a type of message used to exchange information between producers and consumers.
-   * It has a uuid field, a metadata field (see Metadata) and an attribute containing the message payload. 
+   * It has a uuid field, a metadata field (see Metadata) and an attribute containing the message payload.
    * </pre>
    *
    * Protobuf type {@code astreu.protocol.Exchange}

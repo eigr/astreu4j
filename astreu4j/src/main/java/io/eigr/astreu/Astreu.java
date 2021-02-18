@@ -5,6 +5,8 @@ import akka.actor.typed.javadsl.Behaviors;
 import io.eigr.astreu.publisher.DefaultPublisher;
 import io.eigr.astreu.subscriber.DefaultSubscriber;
 
+import java.util.Objects;
+
 public final class Astreu {
 
     private final Config config;
@@ -16,9 +18,14 @@ public final class Astreu {
     }
 
     public static Astreu at(String host, int port) {
+        Objects.requireNonNull(host, "Host not to be null");
+        Objects.requireNonNull(port, "Port not to be null");
         return new Astreu(new Config(host, port, new ConnectionOptions()));
     }
     public static Astreu at(String host, int port, ConnectionOptions options) {
+        Objects.requireNonNull(host, "Host not to be null");
+        Objects.requireNonNull(port, "Port not to be null");
+        Objects.requireNonNull(options, "Use at(host, port) if you not use ConnectionOptions argument");
         return new Astreu(new Config(host, port, options));
     }
 

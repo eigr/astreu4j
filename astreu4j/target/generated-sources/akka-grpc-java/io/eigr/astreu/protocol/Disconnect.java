@@ -5,7 +5,7 @@ package io.eigr.astreu.protocol;
 
 /**
  * <pre>
- * Disconnect serves when the customer wants to end a stream in a controlled manner. 
+ * Disconnect serves when the customer wants to end a stream in a controlled manner.
  * </pre>
  *
  * Protobuf type {@code astreu.protocol.Disconnect}
@@ -477,7 +477,7 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   * Disconnect serves when the customer wants to end a stream in a controlled manner. 
+   * Disconnect serves when the customer wants to end a stream in a controlled manner.
    * </pre>
    *
    * Protobuf type {@code astreu.protocol.Disconnect}

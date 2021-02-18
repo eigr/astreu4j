@@ -124,8 +124,9 @@ public final class ProtocolProto {
       "\001(\0132\027.astreu.protocol.SystemH\000\022-\n\010exchan" +
       "ge\030\002 \001(\0132\031.astreu.protocol.ExchangeH\000\022#\n" +
       "\003ack\030\003 \001(\0132\024.astreu.protocol.AckH\000B\006\n\004da" +
-      "taB*\n\027io.eigr.astreu.protocolB\rProtocolP" +
-      "rotoP\001b\006proto3"
+      "taBF\n\027io.eigr.astreu.protocolB\rProtocolP" +
+      "rotoH\001P\001\252\002\027Io.Eigr.Astreu.Protocolb\006prot" +
+      "o3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,

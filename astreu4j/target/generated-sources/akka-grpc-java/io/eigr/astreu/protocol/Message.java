@@ -5,12 +5,12 @@ package io.eigr.astreu.protocol;
 
 /**
  * <pre>
- * Message is a box for various sub types of messages 
- * that can be exchanged between the clients and the Broker via gRPC stream channel. 
+ * Message is a box for various sub types of messages
+ * that can be exchanged between the clients and the Broker via gRPC stream channel.
  * It can currently contain one of three message types:
  *     System: System messages, such as Connect and Disconnect, among others (see System).
  *     Exchange: The useful message between producers and consumers (see Exchange)
- *     Ack: A receipt confirmation message (see Ack) 
+ *     Ack: A receipt confirmation message (see Ack)
  * </pre>
  *
  * Protobuf type {@code astreu.protocol.Message}
@@ -458,12 +458,12 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   * Message is a box for various sub types of messages 
-   * that can be exchanged between the clients and the Broker via gRPC stream channel. 
+   * Message is a box for various sub types of messages
+   * that can be exchanged between the clients and the Broker via gRPC stream channel.
    * It can currently contain one of three message types:
    *     System: System messages, such as Connect and Disconnect, among others (see System).
    *     Exchange: The useful message between producers and consumers (see Exchange)
-   *     Ack: A receipt confirmation message (see Ack) 
+   *     Ack: A receipt confirmation message (see Ack)
    * </pre>
    *
    * Protobuf type {@code astreu.protocol.Message}

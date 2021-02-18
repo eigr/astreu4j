@@ -48,7 +48,7 @@ public interface AckOrBuilder extends
 
   /**
    * <pre>
-   * Metadata. Must contain the original message uuid in the 'correlation' attribute 
+   * Metadata. Must contain the original message uuid in the 'correlation' attribute
    * </pre>
    *
    * <code>.astreu.protocol.Metadata metadata = 3;</code>
@@ -57,7 +57,7 @@ public interface AckOrBuilder extends
   boolean hasMetadata();
   /**
    * <pre>
-   * Metadata. Must contain the original message uuid in the 'correlation' attribute 
+   * Metadata. Must contain the original message uuid in the 'correlation' attribute
    * </pre>
    *
    * <code>.astreu.protocol.Metadata metadata = 3;</code>
@@ -66,7 +66,7 @@ public interface AckOrBuilder extends
   io.eigr.astreu.protocol.Metadata getMetadata();
   /**
    * <pre>
-   * Metadata. Must contain the original message uuid in the 'correlation' attribute 
+   * Metadata. Must contain the original message uuid in the 'correlation' attribute
    * </pre>
    *
    * <code>.astreu.protocol.Metadata metadata = 3;</code>
@@ -75,7 +75,7 @@ public interface AckOrBuilder extends
 
   /**
    * <pre>
-   * Subscription identifier 
+   * Subscription identifier
    * </pre>
    *
    * <code>string subscription = 4;</code>
@@ -84,7 +84,7 @@ public interface AckOrBuilder extends
   java.lang.String getSubscription();
   /**
    * <pre>
-   * Subscription identifier 
+   * Subscription identifier
    * </pre>
    *
    * <code>string subscription = 4;</code>

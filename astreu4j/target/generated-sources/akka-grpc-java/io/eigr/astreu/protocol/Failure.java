@@ -7,10 +7,10 @@ package io.eigr.astreu.protocol;
  * <pre>
  * System message to indicate any type of failure that occurred during message processing.
  * A failure can be of two types:
- *      FATAL:     If the Broker sends a failure of this type, it is recommended that the client 
- *                 finish the current gRPC stream and try to reconnect later because there is no 
+ *      FATAL:     If the Broker sends a failure of this type, it is recommended that the client
+ *                 finish the current gRPC stream and try to reconnect later because there is no
  *                 guarantee that this stream will be healthy.
- *      TRANSIENT: A transient failure indicates a failure during the processing of a specific message, 
+ *      TRANSIENT: A transient failure indicates a failure during the processing of a specific message,
  *                 indicating for example that certain validations of the message did not occur successfully.
  * A failure message must contain the following attributes:
  *     uuid:        Unique identifier of the message.
@@ -558,10 +558,10 @@ private static final long serialVersionUID = 0L;
    * <pre>
    * System message to indicate any type of failure that occurred during message processing.
    * A failure can be of two types:
-   *      FATAL:     If the Broker sends a failure of this type, it is recommended that the client 
-   *                 finish the current gRPC stream and try to reconnect later because there is no 
+   *      FATAL:     If the Broker sends a failure of this type, it is recommended that the client
+   *                 finish the current gRPC stream and try to reconnect later because there is no
    *                 guarantee that this stream will be healthy.
-   *      TRANSIENT: A transient failure indicates a failure during the processing of a specific message, 
+   *      TRANSIENT: A transient failure indicates a failure during the processing of a specific message,
    *                 indicating for example that certain validations of the message did not occur successfully.
    * A failure message must contain the following attributes:
    *     uuid:        Unique identifier of the message.
