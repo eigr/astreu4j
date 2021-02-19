@@ -15,6 +15,7 @@ import org.reactivestreams.Publisher;
 import reactor.core.publisher.EmitterProcessor;
 
 import java.util.Objects;
+import java.util.Optional;
 import java.util.UUID;
 
 public final class DefaultSubscriber implements Subscriber {
@@ -59,8 +60,8 @@ public final class DefaultSubscriber implements Subscriber {
                 .build());
         return responseStream
                 .map(this::createMessageWithContext)
-                .filter(msg -> Objects.nonNull(msg.getExchange()))
-                .runWith(Sink.asPublisher(AsPublisher.WITHOUT_FANOUT), system);
+                .filter(msg -> Objects.nonNull(msg.getMessage()))
+                .runWith(Sink.asPublisher(AsPublisher.WITH_FANOUT), system);
     }
 
     public String getTopic() {
@@ -85,17 +86,31 @@ public final class DefaultSubscriber implements Subscriber {
 
     private MessageWithContext createMessageWithContext(Message incoming) {
         final Message.DataCase dataCase = incoming.getDataCase();
-        Exchange exchange = null;
+        Optional<Exchange> exchange = Optional.empty();
+        MessageWithContext.IncomingType type = null;
         switch (dataCase) {
             case EXCHANGE:
-                exchange = incoming.getExchange();
+                type = MessageWithContext.IncomingType.EXCHANGE;
+                exchange = Optional.of(incoming.getExchange());
                 system.log().debug("Exchange Message {}", exchange);
                 break;
             case SYSTEM:
                 final System sys = incoming.getSystem();
                 system.log().debug("System Message {}", sys);
+
+                switch (sys.getDataCase()) {
+                    case INFO:
+                        type = MessageWithContext.IncomingType.INFO;
+                        break;
+                    case FAILURE:
+                        type = MessageWithContext.IncomingType.FAILURE;
+                        break;
+                    default:
+                        type = null;
+                }
                 break;
             case ACK:
+                type = MessageWithContext.IncomingType.EXCHANGE;
                 final Ack ack = incoming.getAck();
                 system.log().debug("Ack Message {}", ack);
                 break;
@@ -105,9 +120,11 @@ public final class DefaultSubscriber implements Subscriber {
             default:
                 // code block
         }
+
         return new MessageWithContext(
+                type,
                 new AcknowledgeContext(system, subscription, exchange, stream),
-                exchange);
+                incoming);
     }
 
 }

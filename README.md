@@ -24,11 +24,12 @@ class ConsumerClient {
         // Then use with any Reactive Streams framework (build-in with Project Reactor or Akka)
         Flux.from(publisher).subscribe(messageWithContext -> {
             final AcknowledgeContext context = messageWithContext.getContext();
-            context.logger().info("In Exchange Message {}", messageWithContext.getExchange());
+            context.logger().info("Incoming Message {}", messageWithContext.getMessage());
             context.accept(); // Send acknowledge or reject message with ackCtx.reject()
         });
     }
 }
+
 ```
 
 Create Publisher

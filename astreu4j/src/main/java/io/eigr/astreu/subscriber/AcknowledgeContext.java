@@ -11,16 +11,17 @@ import org.slf4j.Logger;
 import reactor.core.publisher.EmitterProcessor;
 
 import java.time.Instant;
+import java.util.Optional;
 import java.util.UUID;
 
 public final class AcknowledgeContext implements SubscriptionContext {
 
-    private final Exchange exchange;
     private final String subscription;
     private final ActorSystem<Void> system;
+    private final Optional<Exchange> exchange;
     private final EmitterProcessor<Message> stream;
 
-    public AcknowledgeContext(ActorSystem<Void> system, String subscription, Exchange exchange, EmitterProcessor<Message> stream) {
+    public AcknowledgeContext(ActorSystem<Void> system, String subscription, Optional<Exchange> exchange, EmitterProcessor<Message> stream) {
         this.stream = stream;
         this.system = system;
         this.exchange = exchange;
@@ -29,28 +30,31 @@ public final class AcknowledgeContext implements SubscriptionContext {
 
     @Override
     public void accept() {
-        Instant time = Instant.now();
-        stream.onNext(Message.newBuilder()
-                .setAck(
-                        Ack.newBuilder()
-                                .setSubscription(subscription)
-                                .setReason(Ack.Reason.ACCEPT)
-                                .setUuid(UUID.randomUUID().toString())
-                                .setMetadata(createMetadata(time))
-                                .build())
-                .build());
+        if (exchange.isPresent()) {
+            Instant time = Instant.now();
+            stream.onNext(Message.newBuilder()
+                    .setAck(
+                            Ack.newBuilder()
+                                    .setSubscription(subscription)
+                                    .setReason(Ack.Reason.ACCEPT)
+                                    .setUuid(UUID.randomUUID().toString())
+                                    .setMetadata(createMetadata(time))
+                                    .build())
+                    .build());
+        }
     }
 
     private Metadata createMetadata(Instant time) {
+        Exchange exc = exchange.get();
         return Metadata.newBuilder()
-                .setCorrelation(exchange.getUuid())
-                .setProducerId(exchange.getMetadata().getProducerId())
+                .setCorrelation(exc.getUuid())
+                .setProducerId(exc.getMetadata().getProducerId())
                 .putProperties(
                         SubscriptionContext.SOURCE_MESSAGE_TIME_NANOS,
-                        String.valueOf(exchange.getMetadata().getTimestamp().getNanos()))
+                        String.valueOf(exc.getMetadata().getTimestamp().getNanos()))
                 .putProperties(
                         SubscriptionContext.SOURCE_MESSAGE_TIME_SECONDS,
-                        String.valueOf(exchange.getMetadata().getTimestamp().getSeconds()))
+                        String.valueOf(exc.getMetadata().getTimestamp().getSeconds()))
                 .setTimestamp(
                         Timestamp.newBuilder()
                                 .setNanos(time.getNano())
@@ -61,16 +65,18 @@ public final class AcknowledgeContext implements SubscriptionContext {
 
     @Override
     public void reject() {
-        Instant time = Instant.now();
-        stream.onNext(Message.newBuilder()
-                .setAck(
-                        Ack.newBuilder()
-                                .setSubscription(subscription)
-                                .setReason(Ack.Reason.REJECT)
-                                .setUuid(UUID.randomUUID().toString())
-                                .setMetadata(createMetadata(time))
-                                .build())
-                .build());
+        if (exchange.isPresent()) {
+            Instant time = Instant.now();
+            stream.onNext(Message.newBuilder()
+                    .setAck(
+                            Ack.newBuilder()
+                                    .setSubscription(subscription)
+                                    .setReason(Ack.Reason.REJECT)
+                                    .setUuid(UUID.randomUUID().toString())
+                                    .setMetadata(createMetadata(time))
+                                    .build())
+                    .build());
+        }
     }
 
     @Override
