@@ -16,9 +16,8 @@ import org.reactivestreams.Publisher;
 import reactor.core.publisher.EmitterProcessor;
 
 import java.time.Duration;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
+import java.util.function.Predicate;
 
 public final class DefaultSubscriber implements Subscriber {
     private static final EmitterProcessor<Message> stream = EmitterProcessor.create();
@@ -31,6 +30,9 @@ public final class DefaultSubscriber implements Subscriber {
     private final SubscriberClient client;
     private final ActorSystem<Void> system;
     private final Source<Message, NotUsed> responseStream;
+
+    private Predicate<MessageWithContext> predicate = null;
+    private final List<MessageWithContext.IncomingType> filterTypes = new ArrayList<>();
 
     public DefaultSubscriber(String topic, String subscription, ActorSystem<Void> system, Config config) {
         Objects.requireNonNull(topic, "Topic is mandatory");
@@ -62,6 +64,8 @@ public final class DefaultSubscriber implements Subscriber {
                 .build());
         return responseStream
                 .map(this::createMessageWithContext)
+                .filter(this::isAcceptable)
+                .filter(this::applyFilter)
                 .runWith(Sink.asPublisher(AsPublisher.WITH_FANOUT), system);
     }
 
@@ -82,7 +86,23 @@ public final class DefaultSubscriber implements Subscriber {
         return responseStream
                 .throttle(elements, per, maximumBurst, (ThrottleMode) ThrottleMode.shaping())
                 .map(this::createMessageWithContext)
+                .filter(this::isAcceptable)
+                .filter(this::applyFilter)
                 .runWith(Sink.asPublisher(AsPublisher.WITH_FANOUT), system);
+    }
+
+    @Override
+    public Subscriber receiveOnly(MessageWithContext.IncomingType... types) {
+        if (Objects.nonNull(types) && types.length > 0) {
+            filterTypes.addAll(Arrays.asList(types));
+        }
+        return this;
+    }
+
+    @Override
+    public Subscriber filter(Predicate<MessageWithContext> predicate) {
+        this.predicate = predicate;
+        return this;
     }
 
     public String getTopic() {
@@ -142,5 +162,17 @@ public final class DefaultSubscriber implements Subscriber {
                 type,
                 new AcknowledgeContext(system, subscription, exchange, stream),
                 incoming);
+    }
+
+    private boolean isAcceptable(MessageWithContext msg) {
+        if (filterTypes.isEmpty()) {
+            return true;
+        }
+
+        return filterTypes.contains(msg.getType());
+    }
+
+    private boolean applyFilter(MessageWithContext msg) {
+        return Objects.isNull(this.predicate) || this.predicate.test(msg);
     }
 }
