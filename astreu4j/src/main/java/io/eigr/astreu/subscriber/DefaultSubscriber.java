@@ -60,7 +60,7 @@ public final class DefaultSubscriber implements Subscriber {
                 .build());
         return responseStream
                 .map(this::createMessageWithContext)
-                .filter(msg -> Objects.nonNull(msg.getMessage()))
+                //.filter(msg -> Objects.nonNull(msg.getMessage()))
                 .runWith(Sink.asPublisher(AsPublisher.WITH_FANOUT), system);
     }
 

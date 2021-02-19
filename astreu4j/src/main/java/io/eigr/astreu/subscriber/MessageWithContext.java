@@ -1,8 +1,5 @@
 package io.eigr.astreu.subscriber;
 
-import io.eigr.astreu.protocol.Exchange;
-import io.eigr.astreu.protocol.Failure;
-import io.eigr.astreu.protocol.Info;
 import io.eigr.astreu.protocol.Message;
 
 import java.util.Objects;
@@ -22,18 +19,20 @@ public final class MessageWithContext {
         return type;
     }
 
-    public Object getMessage() {
+    public <T> T getMessage() {
         Objects.requireNonNull(type, "Received invalid message type");
+
         switch (type) {
             case EXCHANGE:
-                return this.message.getExchange();
+                return (T) this.message.getExchange();
             case INFO:
-                return this.message.getSystem().getInfo();
+                return (T) this.message.getSystem().getInfo();
             case FAILURE:
-                return this.message.getSystem().getFailure();
+                return (T) this.message.getSystem().getFailure();
             default:
                 throw new IllegalStateException("Received invalid message type");
         }
+
     }
 
     public AcknowledgeContext getContext() {
