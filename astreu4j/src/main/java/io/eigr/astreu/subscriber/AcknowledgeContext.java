@@ -2,6 +2,7 @@ package io.eigr.astreu.subscriber;
 
 import akka.actor.typed.ActorSystem;
 import com.google.protobuf.Timestamp;
+import io.eigr.astreu.NotMessageCorrelationException;
 import io.eigr.astreu.SubscriptionContext;
 import io.eigr.astreu.protocol.Ack;
 import io.eigr.astreu.protocol.Exchange;
@@ -21,7 +22,8 @@ public final class AcknowledgeContext implements SubscriptionContext {
     private final Optional<Exchange> exchange;
     private final EmitterProcessor<Message> stream;
 
-    public AcknowledgeContext(ActorSystem<Void> system, String subscription, Optional<Exchange> exchange, EmitterProcessor<Message> stream) {
+    public AcknowledgeContext(
+            ActorSystem<Void> system, String subscription, Optional<Exchange> exchange, EmitterProcessor<Message> stream) {
         this.stream = stream;
         this.system = system;
         this.exchange = exchange;
@@ -44,25 +46,6 @@ public final class AcknowledgeContext implements SubscriptionContext {
         }
     }
 
-    private Metadata createMetadata(Instant time) {
-        Exchange exc = exchange.get();
-        return Metadata.newBuilder()
-                .setCorrelation(exc.getUuid())
-                .setProducerId(exc.getMetadata().getProducerId())
-                .putProperties(
-                        SubscriptionContext.SOURCE_MESSAGE_TIME_NANOS,
-                        String.valueOf(exc.getMetadata().getTimestamp().getNanos()))
-                .putProperties(
-                        SubscriptionContext.SOURCE_MESSAGE_TIME_SECONDS,
-                        String.valueOf(exc.getMetadata().getTimestamp().getSeconds()))
-                .setTimestamp(
-                        Timestamp.newBuilder()
-                                .setNanos(time.getNano())
-                                .setSeconds(time.getEpochSecond())
-                                .build())
-                .build();
-    }
-
     @Override
     public void reject() {
         if (exchange.isPresent()) {
@@ -80,7 +63,45 @@ public final class AcknowledgeContext implements SubscriptionContext {
     }
 
     @Override
+    public void reply(Exchange message) throws NotMessageCorrelationException {
+        if (exchange.isPresent()) {
+            Instant time = Instant.now();
+            final Metadata metadata = message.getMetadata();
+            final Metadata required = createMetadata(time);
+
+            stream.onNext(Message.newBuilder()
+                    .setExchange(message.toBuilder()
+                            .setMetadata(
+                                    metadata.toBuilder()
+                                            .mergeFrom(required)
+                                            .build()))
+                    .build());
+        } else {
+            throw new NotMessageCorrelationException();
+        }
+    }
+
+    @Override
     public Logger logger() {
         return this.system.log();
+    }
+
+    private Metadata createMetadata(Instant time) {
+        Exchange exc = exchange.get();
+        return Metadata.newBuilder()
+                .setCorrelation(exc.getUuid())
+                .setProducerId(exc.getMetadata().getProducerId())
+                .putProperties(
+                        SubscriptionContext.SOURCE_MESSAGE_TIME_NANOS,
+                        String.valueOf(exc.getMetadata().getTimestamp().getNanos()))
+                .putProperties(
+                        SubscriptionContext.SOURCE_MESSAGE_TIME_SECONDS,
+                        String.valueOf(exc.getMetadata().getTimestamp().getSeconds()))
+                .setTimestamp(
+                        Timestamp.newBuilder()
+                                .setNanos(time.getNano())
+                                .setSeconds(time.getEpochSecond())
+                                .build())
+                .build();
     }
 }

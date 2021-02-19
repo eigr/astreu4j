@@ -6,8 +6,6 @@ import io.eigr.astreu.subscriber.MessageWithContext;
 import org.reactivestreams.Publisher;
 import reactor.core.publisher.Flux;
 
-import java.time.Duration;
-
 class ConsumerClient {
 
     public static void main(final String[] args) {
@@ -27,7 +25,22 @@ class ConsumerClient {
             final Exchange message = messageWithContext.getMessage();
 
             context.logger().info("Incoming Message {}", message);
-            context.accept(); // Send acknowledge or reject message with ackCtx.reject()
+
+            /* Request / Response pattern is supported
+            context.reply(
+                    Exchange.newBuilder()
+                            .setUuid(UUID.randomUUID().toString())
+                            .setMessage(
+                                    Any.newBuilder()
+                                    .setTypeUrl("your.custom.package.type/YourTypeHere")
+                                    .setValue(ByteString.copyFrom("Hello I got your message".getBytes()))
+                                    .build())
+                            .build());
+
+            */
+
+            // Or simply confirm or reject the message
+            context.accept(); // Send acknowledge or reject message with context.reject()
         });
     }
 }

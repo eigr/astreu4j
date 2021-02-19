@@ -19,10 +19,9 @@ class ConsumerClient {
     public static void main(final String[] args) {
         final Publisher<MessageWithContext> publisher =
                 Astreu.at("127.0.0.1", 9980)
-                        .asSub("test", "unique-subscription") 
-                        .bind(); //This create a org.reactivestreams.Publisher
-                        // Or use Throttle Binding
+                        .asSub("test", "unique-subscription")
                         //.bindWithThrottle(1, Duration.ofSeconds(1), 2);
+                        .bind(); //This create a org.reactivestreams.Publisher
 
         // Then use with any Reactive Streams framework (build-in with Project Reactor or Akka)
         Flux.from(publisher).subscribe(messageWithContext -> {
@@ -34,7 +33,22 @@ class ConsumerClient {
             final Exchange message = messageWithContext.getMessage();
 
             context.logger().info("Incoming Message {}", message);
-            context.accept(); // Send acknowledge or reject message with ackCtx.reject()
+
+            /* Request / Response pattern is supported
+            context.reply(
+                    Exchange.newBuilder()
+                            .setUuid(UUID.randomUUID().toString())
+                            .setMessage(
+                                    Any.newBuilder()
+                                    .setTypeUrl("your.custom.package.type/YourTypeHere")
+                                    .setValue(ByteString.copyFrom("Hello I got your message".getBytes()))
+                                    .build())
+                            .build());
+
+            */
+            
+            // Or simply confirm or reject the message 
+            context.accept(); // Send acknowledge or reject message with context.reject()
         });
     }
 }
