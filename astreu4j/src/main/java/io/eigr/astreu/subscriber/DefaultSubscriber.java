@@ -67,7 +67,7 @@ public final class DefaultSubscriber implements Subscriber {
     }
 
     @Override
-    public Publisher<MessageWithContext> bindWithThrotle(int elements, Duration per, int maximumBurst) {
+    public Publisher<MessageWithContext> bindWithThrottle(int elements, Duration per, int maximumBurst) {
         stream.onNext(Message.newBuilder()
                 .setSystem(
                         System.newBuilder()

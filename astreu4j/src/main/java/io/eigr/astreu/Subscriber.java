@@ -8,6 +8,6 @@ import java.time.Duration;
 public interface Subscriber {
 
     Publisher<MessageWithContext> bind();
-    Publisher<MessageWithContext> bindWithThrotle(int elements, Duration per, int maximumBurst);
+    Publisher<MessageWithContext> bindWithThrottle(int elements, Duration per, int maximumBurst);
 
 }

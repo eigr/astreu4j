@@ -14,8 +14,8 @@ class ConsumerClient {
         final Publisher<MessageWithContext> publisher =
                 Astreu.at("127.0.0.1", 9980)
                         .asSub("test", "unique-subscription")
-                        .bindWithThrotle(1, Duration.ofSeconds(1), 2);
-                       // .bind(); //This create a org.reactivestreams.Publisher
+                        //.bindWithThrottle(1, Duration.ofSeconds(1), 2);
+                        .bind(); //This create a org.reactivestreams.Publisher
 
         // Then use with any Reactive Streams framework (build-in with Project Reactor or Akka)
         Flux.from(publisher).subscribe(messageWithContext -> {
