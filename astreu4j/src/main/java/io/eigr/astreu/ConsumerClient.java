@@ -16,7 +16,10 @@ class ConsumerClient {
 
         // Then use with any Reactive Streams framework (build-in with Project Reactor or Akka)
         Flux.from(publisher).subscribe(messageWithContext -> {
+            //messageWithContext.getType() // --> Messages can be of some types: [Exchange, Info, Failure]
+            // For now I am assuming it is an Exchange, but you should check this out before doing this here
             final Exchange message = messageWithContext.getMessage();
+
             final AcknowledgeContext context = messageWithContext.getContext();
 
             context.logger().info("Incoming Message {}", message);
