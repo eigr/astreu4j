@@ -3,6 +3,7 @@ package io.eigr.astreu.subscriber;
 import akka.NotUsed;
 import akka.actor.typed.ActorSystem;
 import akka.grpc.GrpcClientSettings;
+import akka.stream.ThrottleMode;
 import akka.stream.javadsl.AsPublisher;
 import akka.stream.javadsl.Sink;
 import akka.stream.javadsl.Source;
@@ -14,12 +15,13 @@ import io.eigr.astreu.protocol.*;
 import org.reactivestreams.Publisher;
 import reactor.core.publisher.EmitterProcessor;
 
+import java.time.Duration;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 
 public final class DefaultSubscriber implements Subscriber {
-    private static final EmitterProcessor<Message> stream = EmitterProcessor.<Message>create();
+    private static final EmitterProcessor<Message> stream = EmitterProcessor.create();
     private static final Source<Message, NotUsed> requestStream = Source.fromPublisher(stream);
 
     private final String topic;
@@ -64,12 +66,28 @@ public final class DefaultSubscriber implements Subscriber {
                 .runWith(Sink.asPublisher(AsPublisher.WITH_FANOUT), system);
     }
 
-    public String getTopic() {
-        return topic;
+    @Override
+    public Publisher<MessageWithContext> bindWithThrotle(int elements, Duration per, int maximumBurst) {
+        stream.onNext(Message.newBuilder()
+                .setSystem(
+                        System.newBuilder()
+                                .setConnect(
+                                        Connect.newBuilder()
+                                                .setTopic(topic)
+                                                .setSubscription(subscription)
+                                                .setUuid(connectionId)
+                                                .build()
+                                )
+                                .build())
+                .build());
+        return responseStream
+                .throttle(elements, per, maximumBurst, (ThrottleMode) ThrottleMode.shaping())
+                .map(this::createMessageWithContext)
+                .runWith(Sink.asPublisher(AsPublisher.WITH_FANOUT), system);
     }
 
-    public Config getConfig() {
-        return config;
+    public String getTopic() {
+        return topic;
     }
 
     public String getSubscription() {
