@@ -88,7 +88,7 @@ class ProducerClient {
             replyMessage.logger().info("Reply Message -> {}", replyMessage);
         });
 
-        for (int i = 0; i < 1000; i++) {
+        for (int i = 0; i < 500000; i++) {
             producer.publish(
                     String.valueOf(i), //id of a message or use producer.publish(any) For automatic creation of UUID-based ids 
                     Any.newBuilder()
