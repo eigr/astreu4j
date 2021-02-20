@@ -30,6 +30,6 @@ jobs:
       run: mvn -B package --file astreu4j/pom.xml
     
     - name: Publish to GitHub Packages Apache Maven
-      run: mvn deploy -s $GITHUB_WORKSPACE/astreu4j/settings.xml
+      run: mvn deploy --file astreu4j/pom.xml -s $GITHUB_WORKSPACE/astreu4j/settings.xml
       env:
         GITHUB_TOKEN: ${{ github.token }}
