@@ -1,4 +1,4 @@
-# astreu4j
+# Astreu4j
 Astreu Java client
 
 ## Usage
