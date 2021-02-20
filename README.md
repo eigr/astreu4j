@@ -61,7 +61,7 @@ class ConsumerClient {
 
 Create Publisher
 
-```
+```java
 package io.eigr.astreu;
 
 import com.google.protobuf.Any;
