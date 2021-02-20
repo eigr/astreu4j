@@ -8,7 +8,7 @@ import java.time.Duration;
 import java.util.function.Predicate;
 
 public interface Subscriber {
-    Subscriber receiveOnly(MessageWithContext.IncomingType... types);
+    Subscriber receiveOnly(MessageType... types);
 
     Subscriber filter(Predicate<MessageWithContext> predicate);
 

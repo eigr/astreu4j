@@ -33,7 +33,7 @@ public final class Astreu {
         return new DefaultSubscriber(topic, subscription, system, config);
     }
 
-    public Publisher asPub(String topic, String connectionId) {
+    public Producer asPub(String topic, String connectionId) {
         return new DefaultPublisher(topic, connectionId, system, config);
     }
 }

@@ -1,21 +1,22 @@
 package io.eigr.astreu.subscriber;
 
+import io.eigr.astreu.MessageType;
 import io.eigr.astreu.protocol.Message;
 
 import java.util.Objects;
 
 public final class MessageWithContext {
-    private final IncomingType type;
     private final Message message;
+    private final MessageType type;
     private final AcknowledgeContext context;
 
-    public MessageWithContext(IncomingType type, AcknowledgeContext context, Message message) {
+    public MessageWithContext(MessageType type, AcknowledgeContext context, Message message) {
         this.type = type;
         this.context = context;
         this.message = message;
     }
 
-    public IncomingType getType() {
+    public MessageType getType() {
         return type;
     }
 
@@ -37,10 +38,6 @@ public final class MessageWithContext {
 
     public AcknowledgeContext getContext() {
         return context;
-    }
-
-    public enum IncomingType {
-        EXCHANGE, FAILURE, INFO
     }
 
     @Override
