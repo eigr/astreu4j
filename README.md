@@ -23,7 +23,7 @@ class ConsumerClient {
 
                         // You can use some filter options during receive messages
                         //.filter(msg -> true)
-                        //.receiveOnly(MessageWithContext.IncomingType.EXCHANGE)
+                        //.receiveOnly(MessageType.EXCHANGE)
 
                         //.bindWithThrottle(1, Duration.ofSeconds(1), 2);
                         .bind(); //This create a org.reactivestreams.Publisher
