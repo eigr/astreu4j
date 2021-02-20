@@ -1,5 +1,6 @@
 # Astreu4j
 Astreu Java client
+
 [![Java CI with Maven](https://github.com/eigr/astreu4j/actions/workflows/maven.yml/badge.svg)](https://github.com/eigr/astreu4j/actions/workflows/maven.yml)
 
 ## Usage
