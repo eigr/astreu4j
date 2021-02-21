@@ -1,7 +1,7 @@
 # Astreu4j
 Astreu Java client
 
-[![Build](https://github.com/eigr/astreu4j/actions/workflows/maven.yml/badge.svg)](https://github.com/eigr/astreu4j/actions/workflows/maven.yml)
+[![Build](https://github.com/eigr/astreu4j/actions/workflows/maven.yml/badge.svg)](https://github.com/eigr/astreu4j/actions/workflows/maven.yml) [![Maven Release](https://github.com/eigr/astreu4j/actions/workflows/release.yml/badge.svg)](https://github.com/eigr/astreu4j/actions/workflows/release.yml)
 
 ## Usage
 
