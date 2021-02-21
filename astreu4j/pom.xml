@@ -20,9 +20,9 @@
         <project.encoding>UTF-8</project.encoding>
     </properties>
 
-    <modules>
+    <!--<modules>
         <module>examples</module>
-    </modules>
+    </modules>-->
 
     <distributionManagement>
         <repository>
