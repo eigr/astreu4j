@@ -1,14 +1,16 @@
-package io.eigr.astreu;
+package io.eigr.astreu.examples;
 
 import com.google.protobuf.Any;
 import com.google.protobuf.ByteString;
+import io.eigr.astreu.Astreu;
+import io.eigr.astreu.Producer;
 import io.eigr.astreu.publisher.ReplyMessage;
 import org.reactivestreams.Publisher;
 import reactor.core.publisher.Flux;
 
 import java.util.UUID;
 
-class ProducerClient {
+class ProducerExample {
 
     public static void main(final String[] args) {
 

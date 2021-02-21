@@ -1,12 +1,13 @@
-package io.eigr.astreu;
+package io.eigr.astreu.examples;
 
+import io.eigr.astreu.Astreu;
 import io.eigr.astreu.protocol.Exchange;
 import io.eigr.astreu.subscriber.AcknowledgeContext;
 import io.eigr.astreu.subscriber.MessageWithContext;
 import org.reactivestreams.Publisher;
 import reactor.core.publisher.Flux;
 
-class ConsumerClient {
+class SubscriberExample {
 
     public static void main(final String[] args) {
         final Publisher<MessageWithContext> publisher =

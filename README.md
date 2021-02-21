@@ -8,15 +8,16 @@ Astreu Java client
 Create Subscriber
 
 ```java
-package io.eigr.astreu;
+package io.eigr.astreu.examples;
 
+import io.eigr.astreu.Astreu;
 import io.eigr.astreu.protocol.Exchange;
 import io.eigr.astreu.subscriber.AcknowledgeContext;
 import io.eigr.astreu.subscriber.MessageWithContext;
 import org.reactivestreams.Publisher;
 import reactor.core.publisher.Flux;
 
-class ConsumerClient {
+class SubscriberExample {
 
     public static void main(final String[] args) {
         final Publisher<MessageWithContext> publisher =
@@ -59,26 +60,29 @@ class ConsumerClient {
         });
     }
 }
+
 ```
 
 Create Publisher
 
 ```java
-package io.eigr.astreu;
+package io.eigr.astreu.examples;
 
 import com.google.protobuf.Any;
 import com.google.protobuf.ByteString;
+import io.eigr.astreu.Astreu;
+import io.eigr.astreu.Producer;
 import io.eigr.astreu.publisher.ReplyMessage;
 import org.reactivestreams.Publisher;
 import reactor.core.publisher.Flux;
 
 import java.util.UUID;
 
-class ProducerClient {
+class ProducerExample {
 
     public static void main(final String[] args) {
 
-        final Producer producer = 
+        final Producer producer =
                 Astreu.at("127.0.0.1", 9980)
                 .asPub("test", UUID.randomUUID().toString().toLowerCase());
 
@@ -92,7 +96,7 @@ class ProducerClient {
 
         for (int i = 0; i < 500000; i++) {
             producer.publish(
-                    String.valueOf(i), //id of a message or use producer.publish(any) For automatic creation of UUID-based ids 
+                    String.valueOf(i), //id of a message or use producer.publish(any) For automatic creation of UUID-based ids
                     Any.newBuilder()
                             .setTypeUrl("io.astreu.custom/Text")
                             .setValue(ByteString.copyFrom(String.format("Hello World Astreu %s", i).getBytes()))

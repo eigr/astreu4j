@@ -3,10 +3,11 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
                       http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+    <packaging>pom</packaging>
     <name>Astreu 4 Java</name>
     <groupId>io.eigr.astreu</groupId>
     <artifactId>astreu4j</artifactId>
-    <version>0.1.1</version>
+    <version>0.1.2</version>
 
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
@@ -19,6 +20,10 @@
         <project.encoding>UTF-8</project.encoding>
     </properties>
 
+    <modules>
+        <module>examples</module>
+    </modules>
+
     <distributionManagement>
         <repository>
             <id>github</id>
@@ -26,7 +31,6 @@
             <url>https://maven.pkg.github.com/eigr/astreu4j</url>
         </repository>
     </distributionManagement>
-
 
     <dependencies>
         <dependency>
@@ -40,7 +44,6 @@
             <artifactId>akka-http2-support_${scala.binary.version}</artifactId>
             <version>${akka.http.version}</version>
         </dependency>
-
 
         <dependency>
             <groupId>com.typesafe.akka</groupId>
@@ -157,27 +160,6 @@
                     <target>9</target>
                 </configuration>
             </plugin>
-            <!--<plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-gpg-plugin</artifactId>
-                <version>1.6</version>
-                <configuration>
-                    &lt;!&ndash; Prevent gpg from using pinentry programs &ndash;&gt;
-                    <gpgArguments>
-                        <arg>&#45;&#45;pinentry-mode</arg>
-                        <arg>loopback</arg>
-                    </gpgArguments>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>sign-artifacts</id>
-                        <phase>verify</phase>
-                        <goals>
-                            <goal>sign</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>-->
         </plugins>
     </build>
 
