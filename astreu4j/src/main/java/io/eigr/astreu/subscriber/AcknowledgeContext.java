@@ -90,6 +90,7 @@ public final class AcknowledgeContext implements SubscriptionContext {
         Exchange exc = exchange.get();
         return Metadata.newBuilder()
                 .setCorrelation(exc.getUuid())
+                .setTopic(exc.getMetadata().getTopic())
                 .setProducerId(exc.getMetadata().getProducerId())
                 .putProperties(
                         SubscriptionContext.SOURCE_MESSAGE_TIME_NANOS,

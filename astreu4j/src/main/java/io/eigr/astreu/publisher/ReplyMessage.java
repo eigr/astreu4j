@@ -75,4 +75,12 @@ public final class ReplyMessage implements PublisherContext {
                 throw new IllegalStateException("Received invalid message type");
         }
     }
+
+    @Override
+    public String toString() {
+        return "ReplyMessage{" +
+                "type=" + type +
+                ", message=" + message +
+                '}';
+    }
 }
