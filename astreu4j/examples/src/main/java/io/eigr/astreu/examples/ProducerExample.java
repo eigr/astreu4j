@@ -4,11 +4,16 @@ import com.google.protobuf.Any;
 import com.google.protobuf.ByteString;
 import io.eigr.astreu.Astreu;
 import io.eigr.astreu.Producer;
+import io.eigr.astreu.protocol.Ack;
 import io.eigr.astreu.publisher.ReplyMessage;
 import org.reactivestreams.Publisher;
 import reactor.core.publisher.Flux;
 
+import java.time.Duration;
+import java.time.Instant;
+import java.util.Map;
 import java.util.UUID;
+import java.util.stream.IntStream;
 
 class ProducerExample {
 
@@ -16,17 +21,29 @@ class ProducerExample {
 
         final Producer producer =
                 Astreu.at("127.0.0.1", 9980)
-                .asPub("test", UUID.randomUUID().toString().toLowerCase());
+                        .asPub("test", UUID.randomUUID().toString().toLowerCase());
 
         final Publisher<ReplyMessage> publisher = producer.bind(); //This create a org.reactivestreams.Publisher
 
         // Then use with any Reactive Streams framework (build-in with Project Reactor or Akka)
         Flux.from(publisher).subscribe(replyMessage -> {
             //Messages can be of some types: [Ack, Exchange, Info, Failure]
+            Ack ack = replyMessage.getMessage();
+            final Map<String, String> properties = ack.getMetadata().getPropertiesMap();
+            if (properties.containsKey("source-time-nanos")) {
+                long seconds = Long.valueOf(properties.get("source-time-seconds"));
+                final Instant sourceInstant = Instant.ofEpochSecond(seconds);
+                replyMessage
+                        .logger()
+                        .info("Total RTT between send Message [{}] and Receive ACK in millis [{}]",
+                                ack.getMetadata().getCorrelation(),
+                                Duration.between(sourceInstant, Instant.now()).toMillis());
+            }
+
             replyMessage.logger().info("Reply Message -> {}", replyMessage);
         });
 
-        for (int i = 0; i < 500000; i++) {
+        IntStream.range(0, 1000).parallel().forEach(i -> {
             producer.publish(
                     String.valueOf(i), //id of a message or use producer.publish(any) For automatic creation of UUID-based ids
                     Any.newBuilder()
@@ -34,6 +51,6 @@ class ProducerExample {
                             .setValue(ByteString.copyFrom(String.format("Hello World Astreu %s", i).getBytes()))
                             .build()
             );
-        }
+        });
     }
 }

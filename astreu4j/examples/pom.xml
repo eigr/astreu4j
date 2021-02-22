@@ -8,14 +8,14 @@
     <parent>
         <artifactId>astreu4j</artifactId>
         <groupId>io.eigr.astreu</groupId>
-        <version>0.1.2</version>
+        <version>0.1.3</version>
     </parent>
 
     <dependencies>
         <dependency>
             <groupId>io.eigr.astreu</groupId>
             <artifactId>astreu4j</artifactId>
-            <version>0.1.2</version>
+            <version>0.1.3</version>
         </dependency>
     </dependencies>
 
