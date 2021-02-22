@@ -51,7 +51,6 @@ public final class AcknowledgeContext implements SubscriptionContext {
                     .build());
 
             nextState();
-            logger().info("State ---> {}", state);
         }
     }
 
