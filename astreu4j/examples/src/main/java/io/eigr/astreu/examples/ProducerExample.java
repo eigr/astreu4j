@@ -30,7 +30,7 @@ class ProducerExample {
             //Messages can be of some types: [Ack, Exchange, Info, Failure]
             Ack ack = replyMessage.getMessage();
             final Map<String, String> properties = ack.getMetadata().getPropertiesMap();
-            if (properties.containsKey("source-time-nanos")) {
+            if (properties.containsKey("source-time-seconds")) {
                 long seconds = Long.valueOf(properties.get("source-time-seconds"));
                 final Instant sourceInstant = Instant.ofEpochSecond(seconds);
                 replyMessage
