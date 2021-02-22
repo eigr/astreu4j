@@ -5,8 +5,11 @@ import com.google.protobuf.ByteString;
 import io.eigr.astreu.Astreu;
 import io.eigr.astreu.Producer;
 import io.eigr.astreu.protocol.Ack;
+import io.eigr.astreu.protocol.Exchange;
+import io.eigr.astreu.protocol.Metadata;
 import io.eigr.astreu.publisher.ReplyMessage;
 import org.reactivestreams.Publisher;
+import org.slf4j.Logger;
 import reactor.core.publisher.Flux;
 
 import java.time.Duration;
@@ -28,22 +31,27 @@ class ProducerExample {
         // Then use with any Reactive Streams framework (build-in with Project Reactor or Akka)
         Flux.from(publisher).subscribe(replyMessage -> {
             //Messages can be of some types: [Ack, Exchange, Info, Failure]
-            Ack ack = replyMessage.getMessage();
-            final Map<String, String> properties = ack.getMetadata().getPropertiesMap();
-            if (properties.containsKey("source-time-seconds")) {
-                long seconds = Long.valueOf(properties.get("source-time-seconds"));
-                final Instant sourceInstant = Instant.ofEpochSecond(seconds);
-                replyMessage
-                        .logger()
-                        .info("Total RTT between send Message [{}] and Receive ACK in millis [{}]",
-                                ack.getMetadata().getCorrelation(),
-                                Duration.between(sourceInstant, Instant.now()).toMillis());
+            Metadata metadata;
+            switch (replyMessage.getType()) {
+                case ACK:
+                    Ack ack = replyMessage.getMessage();
+                    metadata = ack.getMetadata();
+                    computeRtt(replyMessage.logger(), metadata);
+                    break;
+                case EXCHANGE:
+                    Exchange exchange = replyMessage.getMessage();
+                    metadata = exchange.getMetadata();
+                    computeRtt(replyMessage.logger(), metadata);
+                    break;
+                case FAILURE:
+                case INFO:
+                    break;
             }
 
             replyMessage.logger().info("Reply Message -> {}", replyMessage);
         });
 
-        IntStream.range(0, 1000).parallel().forEach(i -> {
+        IntStream.range(0, 2).parallel().forEach(i -> {
             producer.publish(
                     String.valueOf(i), //id of a message or use producer.publish(any) For automatic creation of UUID-based ids
                     Any.newBuilder()
@@ -52,5 +60,16 @@ class ProducerExample {
                             .build()
             );
         });
+    }
+
+    private static void computeRtt(Logger logger, Metadata metadata) {
+        final Map<String, String> properties = metadata.getPropertiesMap();
+        if (properties.containsKey("source-time-seconds")) {
+            long seconds = Long.valueOf(properties.get("source-time-seconds"));
+            final Instant sourceInstant = Instant.ofEpochSecond(seconds);
+            logger.info("Total RTT between send Message [{}] and Receive ACK in millis [{}]",
+                            metadata.getCorrelation(),
+                            Duration.between(sourceInstant, Instant.now()).toMillis());
+        }
     }
 }
