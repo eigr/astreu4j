@@ -6,8 +6,8 @@
     <artifactId>examples</artifactId>
 
     <parent>
-        <artifactId>astreu4j</artifactId>
         <groupId>io.eigr.astreu</groupId>
+        <artifactId>astreu4j</artifactId>
         <version>0.1.4</version>
     </parent>
 
