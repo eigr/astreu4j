@@ -12,7 +12,7 @@ public interface Publisher {
   akka.stream.javadsl.Source<io.eigr.astreu.protocol.Message, akka.NotUsed> publish(akka.stream.javadsl.Source<io.eigr.astreu.protocol.Message, akka.NotUsed> in);
   
 
-  static String name = "astreu.producer.Publisher";
+  static String name = "astreu.core.protocol.producer.Publisher";
   static akka.grpc.ServiceDescription description = new akka.grpc.internal.ServiceDescriptionImpl(name, PublisherProto.getDescriptor());
 
   public static class Serializers {
