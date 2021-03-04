@@ -32,8 +32,8 @@ class SubscriberExample {
 
             context.logger().info("Incoming Message {}", message);
 
-            /* Request / Response pattern is supported
-            context.reply(
+            //Request/Response pattern is supported
+            /*context.reply(
                     Exchange.newBuilder()
                             .setUuid(UUID.randomUUID().toString())
                             .setMessage(
@@ -42,7 +42,6 @@ class SubscriberExample {
                                     .setValue(ByteString.copyFrom("Hello I got your message".getBytes()))
                                     .build())
                             .build());
-
             */
 
             // Or simply confirm or reject the message

@@ -22,16 +22,22 @@ public final class AcknowledgeContext implements SubscriptionContext {
     private final Optional<Exchange> exchange;
     private final EmitterProcessor<Message> stream;
 
+    private ContextState state;
+
     public AcknowledgeContext(
             ActorSystem<Void> system, String subscription, Optional<Exchange> exchange, EmitterProcessor<Message> stream) {
         this.stream = stream;
         this.system = system;
         this.exchange = exchange;
         this.subscription = subscription;
+        this.state  = ContextState.Initial;
+        this.state = nextState();
     }
 
     @Override
     public void accept() {
+        checkIfStateIsValid();
+
         if (exchange.isPresent()) {
             Instant time = Instant.now();
             stream.onNext(Message.newBuilder()
@@ -43,11 +49,15 @@ public final class AcknowledgeContext implements SubscriptionContext {
                                     .setMetadata(createMetadata(time))
                                     .build())
                     .build());
+
+            nextState();
         }
     }
 
     @Override
     public void reject() {
+        checkIfStateIsValid();
+
         if (exchange.isPresent()) {
             Instant time = Instant.now();
             stream.onNext(Message.newBuilder()
@@ -59,11 +69,15 @@ public final class AcknowledgeContext implements SubscriptionContext {
                                     .setMetadata(createMetadata(time))
                                     .build())
                     .build());
+
+            nextState();
         }
     }
 
     @Override
     public void reply(Exchange message) throws NotMessageCorrelationException {
+        checkIfStateIsValid();
+
         if (exchange.isPresent()) {
             Instant time = Instant.now();
             final Metadata metadata = message.getMetadata();
@@ -76,7 +90,11 @@ public final class AcknowledgeContext implements SubscriptionContext {
                                             .mergeFrom(required)
                                             .build()))
                     .build());
+
+            nextState();
         } else {
+            // Is it necessary to change the state of this context to Closed here?
+            // For now I will keep the context open in this condition
             throw new NotMessageCorrelationException();
         }
     }
@@ -104,5 +122,38 @@ public final class AcknowledgeContext implements SubscriptionContext {
                                 .setSeconds(time.getEpochSecond())
                                 .build())
                 .build();
+    }
+
+    private ContextState nextState() {
+        this.state = state.nextState();
+        return this.state;
+    }
+
+    private void checkIfStateIsValid() {
+        if (!ContextState.Opened.equals(state) && !ContextState.Initial.equals(state)) {
+            throw new IllegalStateException("Invalid state of this Context. State " + state);
+        }
+    }
+
+    private enum ContextState {
+        Initial {
+            @Override
+            public ContextState nextState() {
+                return Opened;
+            }
+        },
+        Opened {
+            @Override
+            public ContextState nextState() {
+                return Closed;
+            }
+        },
+        Closed {
+            @Override
+            public ContextState nextState() {
+                return this;
+            }
+        };
+        public abstract ContextState nextState();
     }
 }

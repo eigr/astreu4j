@@ -134,7 +134,7 @@ public abstract class TopicServiceClient extends TopicServiceClientPowerApi impl
   
   
 )
-            .setFullMethodName(MethodDescriptor.generateFullMethodName("astreu.manager.TopicService", "Info"))
+            .setFullMethodName(MethodDescriptor.generateFullMethodName("astreu.core.protocol.manager.TopicService", "Info"))
             .setRequestMarshaller(new ProtoMarshaller<io.eigr.astreu.manager.Topic>(TopicSerializer))
             .setResponseMarshaller(new ProtoMarshaller<io.eigr.astreu.manager.TopicInfo>(TopicInfoSerializer))
             .setSampledToLocalTracing(true)
@@ -148,7 +148,7 @@ public abstract class TopicServiceClient extends TopicServiceClientPowerApi impl
   
   
 )
-            .setFullMethodName(MethodDescriptor.generateFullMethodName("astreu.manager.TopicService", "Drop"))
+            .setFullMethodName(MethodDescriptor.generateFullMethodName("astreu.core.protocol.manager.TopicService", "Drop"))
             .setRequestMarshaller(new ProtoMarshaller<io.eigr.astreu.manager.Topic>(TopicSerializer))
             .setResponseMarshaller(new ProtoMarshaller<com.google.protobuf.Empty>(EmptySerializer))
             .setSampledToLocalTracing(true)
@@ -162,7 +162,7 @@ public abstract class TopicServiceClient extends TopicServiceClientPowerApi impl
   
   
 )
-            .setFullMethodName(MethodDescriptor.generateFullMethodName("astreu.manager.TopicService", "Create"))
+            .setFullMethodName(MethodDescriptor.generateFullMethodName("astreu.core.protocol.manager.TopicService", "Create"))
             .setRequestMarshaller(new ProtoMarshaller<io.eigr.astreu.manager.Topic>(TopicSerializer))
             .setResponseMarshaller(new ProtoMarshaller<io.eigr.astreu.manager.TopicInfo>(TopicInfoSerializer))
             .setSampledToLocalTracing(true)
