@@ -113,7 +113,7 @@ public abstract class SubscriberClient extends SubscriberClientPowerApi implemen
   
   MethodDescriptor.MethodType.BIDI_STREAMING 
 )
-            .setFullMethodName(MethodDescriptor.generateFullMethodName("astreu.consumer.Subscriber", "Subscribe"))
+            .setFullMethodName(MethodDescriptor.generateFullMethodName("astreu.core.protocol.consumer.Subscriber", "Subscribe"))
             .setRequestMarshaller(new ProtoMarshaller<io.eigr.astreu.protocol.Message>(MessageSerializer))
             .setResponseMarshaller(new ProtoMarshaller<io.eigr.astreu.protocol.Message>(MessageSerializer))
             .setSampledToLocalTracing(true)
@@ -127,7 +127,7 @@ public abstract class SubscriberClient extends SubscriberClientPowerApi implemen
   
   
 )
-            .setFullMethodName(MethodDescriptor.generateFullMethodName("astreu.consumer.Subscriber", "Unsubscribe"))
+            .setFullMethodName(MethodDescriptor.generateFullMethodName("astreu.core.protocol.consumer.Subscriber", "Unsubscribe"))
             .setRequestMarshaller(new ProtoMarshaller<io.eigr.astreu.protocol.Message>(MessageSerializer))
             .setResponseMarshaller(new ProtoMarshaller<com.google.protobuf.Empty>(EmptySerializer))
             .setSampledToLocalTracing(true)

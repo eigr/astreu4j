@@ -18,7 +18,7 @@ public interface TopicService {
   java.util.concurrent.CompletionStage<io.eigr.astreu.manager.TopicInfo> create(io.eigr.astreu.manager.Topic in);
   
 
-  static String name = "astreu.manager.TopicService";
+  static String name = "astreu.core.protocol.manager.TopicService";
   static akka.grpc.ServiceDescription description = new akka.grpc.internal.ServiceDescriptionImpl(name, ManagerProto.getDescriptor());
 
   public static class Serializers {

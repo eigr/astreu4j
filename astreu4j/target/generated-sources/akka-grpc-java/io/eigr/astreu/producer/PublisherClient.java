@@ -87,7 +87,7 @@ public abstract class PublisherClient extends PublisherClientPowerApi implements
   
   MethodDescriptor.MethodType.BIDI_STREAMING 
 )
-            .setFullMethodName(MethodDescriptor.generateFullMethodName("astreu.producer.Publisher", "Publish"))
+            .setFullMethodName(MethodDescriptor.generateFullMethodName("astreu.core.protocol.producer.Publisher", "Publish"))
             .setRequestMarshaller(new ProtoMarshaller<io.eigr.astreu.protocol.Message>(MessageSerializer))
             .setResponseMarshaller(new ProtoMarshaller<io.eigr.astreu.protocol.Message>(MessageSerializer))
             .setSampledToLocalTracing(true)

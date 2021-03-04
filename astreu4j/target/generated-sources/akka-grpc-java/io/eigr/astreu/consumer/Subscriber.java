@@ -27,7 +27,7 @@ public interface Subscriber {
   java.util.concurrent.CompletionStage<com.google.protobuf.Empty> unsubscribe(io.eigr.astreu.protocol.Message in);
   
 
-  static String name = "astreu.consumer.Subscriber";
+  static String name = "astreu.core.protocol.consumer.Subscriber";
   static akka.grpc.ServiceDescription description = new akka.grpc.internal.ServiceDescriptionImpl(name, SubscriberProto.getDescriptor());
 
   public static class Serializers {
